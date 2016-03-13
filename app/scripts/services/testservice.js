@@ -10,7 +10,7 @@
 angular.module('appApp')
   .service('testService', function () {
 
-    this.fisk = 'asdfasdf';
+    this.fisk = 'hhaaha';
 
     this.getFish = function() {
       return this.fisk;
