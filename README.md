@@ -1,11 +1,18 @@
 # iprog
 
-This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
-version 0.15.1.
+## Install
+
+`npm install -g grunt-cli bower yo generator-karma generator-angular`
+
+then
+
+`npm install`
 
 ## Build & development
 
 Run `grunt` for building and `grunt serve` for preview.
+
+see [yo angular generator](https://github.com/yeoman/generator-angular) for creating routes, services etc
 
 ## Testing
 
