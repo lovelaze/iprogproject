@@ -3,7 +3,7 @@
 describe('Service: testService', function () {
 
   // load the service's module
-  beforeEach(module('appApp'));
+  beforeEach(module('iprogApp'));
 
   // instantiate service
   var testService;

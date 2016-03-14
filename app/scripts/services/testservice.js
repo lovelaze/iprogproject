@@ -2,19 +2,12 @@
 
 /**
  * @ngdoc service
- * @name appApp.testService
+ * @name iprogApp.testService
  * @description
  * # testService
- * Service in the appApp.
+ * Service in the iprogApp.
  */
-angular.module('appApp')
+angular.module('iprogApp')
   .service('testService', function () {
-
-    this.fisk = 'hhaaha';
-
-    this.getFish = function() {
-      return this.fisk;
-    };
-
     // AngularJS will instantiate a singleton by calling "new" on this function
   });

@@ -2,25 +2,16 @@
 
 /**
  * @ngdoc function
- * @name appApp.controller:MainCtrl
+ * @name iprogApp.controller:MainCtrl
  * @description
  * # MainCtrl
- * Controller of the appApp
+ * Controller of the iprogApp
  */
-angular.module('appApp')
-  .controller('MainCtrl', function ($scope, testService) {
-
+angular.module('iprogApp')
+  .controller('MainCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
-
-    $scope.asdf = testService.getFish();
-
-
-    this.foo = function() {
-      window.alert('fisk');
-      return testService.getFish();
-    };
   });

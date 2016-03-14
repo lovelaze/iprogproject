@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc overview
- * @name appApp
+ * @name iprogApp
  * @description
- * # appApp
+ * # iprogApp
  *
  * Main module of the application.
  */
 angular
-  .module('appApp', [
+  .module('iprogApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
