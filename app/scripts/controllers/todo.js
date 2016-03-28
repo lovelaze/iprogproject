@@ -8,7 +8,7 @@
  * Controller of the iprogApp
  */
 angular.module('iprogApp')
-  .controller('TodoCtrl', function ($scope) {
+  .controller('TodoCtrl', function ($scope, fireservice) {
     $scope.todolist = [];
 
     $scope.addTodo = function(){
