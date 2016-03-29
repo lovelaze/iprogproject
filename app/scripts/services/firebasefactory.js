@@ -28,19 +28,19 @@ angular.module('iprogApp')
           console.log($firebaseObject(_ref));
       },
       test: function() {
-          _ref.child("playlists").set({
+          _ref.child('playlists').set({
 
               ax14293a9sdf9: {
                   bajs: 'name',
                   name: 'bajs'
               }
 
-          })
+          });
       },
       test2: function() {
-          _ref.child("playlists").once("value", function(data) {
+          _ref.child('playlists').once('value', function(data) {
               console.log(data.val());
-          })
+          });
       }
     };
   });
