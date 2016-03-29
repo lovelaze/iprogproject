@@ -15,7 +15,8 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'firebase'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -28,11 +29,6 @@ angular
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl',
         controllerAs: 'about'
-      })
-      .when('/todo', {
-        templateUrl: 'views/todo.html',
-        controller: 'TodoCtrl',
-        controllerAs: 'todo'
       })
       .otherwise({
         redirectTo: '/'

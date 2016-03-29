@@ -8,10 +8,17 @@
  * Controller of the iprogApp
  */
 angular.module('iprogApp')
-  .controller('MainCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('MainCtrl', function ($scope, $window, firebasefactory) {
+
+      $scope.bajs = 'banankorv';
+
+      firebasefactory.test2();
+
+
+
+
+
+
+
+
   });

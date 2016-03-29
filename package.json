@@ -39,5 +39,9 @@
   },
   "scripts": {
     "test": "karma start test/karma.conf.js"
+  },
+  "dependencies": {
+    "angularfire": "^1.2.0",
+    "firebase": "^2.4.2"
   }
 }
