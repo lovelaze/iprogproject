@@ -14,11 +14,4 @@ angular.module('iprogApp')
 
       firebasefactory.test2();
 
-
-
-
-
-
-
-
   });

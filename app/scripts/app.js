@@ -30,6 +30,11 @@ angular
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
+      .when('/soundcloud', {
+        templateUrl: 'views/soundcloud.html',
+        controller: 'SoundcloudCtrl',
+        controllerAs: 'soundcloud'
+      })
       .otherwise({
         redirectTo: '/'
       });
