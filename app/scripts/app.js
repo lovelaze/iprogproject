@@ -16,7 +16,8 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'firebase'
+    'firebase',
+    'door3.css'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -38,7 +39,15 @@ angular
       .when('/search', {
         templateUrl: 'views/search.html',
         controller: 'SearchCtrl',
-        controllerAs: 'search'
+        controllerAs: 'search',
+        css: '/styles/search.css'
+
+      })
+      .when('/profile', {
+        templateUrl: 'views/profile.html',
+        controller: 'ProfileCtrl',
+        controllerAs: 'profile',
+        css: '/styles/profile.css'
       })
       .otherwise({
         redirectTo: '/'
