@@ -2,13 +2,13 @@
 
 /**
  * @ngdoc function
- * @name iprogApp.controller:AboutCtrl
+ * @name iprogApp.controller:SearchCtrl
  * @description
- * # AboutCtrl
+ * # SearchCtrl
  * Controller of the iprogApp
  */
 angular.module('iprogApp')
-  .controller('AboutCtrl', function () {
+  .controller('SearchCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
