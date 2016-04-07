@@ -8,10 +8,10 @@
  * Controller of the iprogApp
  */
 angular.module('iprogApp')
-  .controller('SearchCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('SearchCtrl', function ($scope) {
+
+    $scope.test = function() {
+            console.log("foof");
+    };
+
   });
