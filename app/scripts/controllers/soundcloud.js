@@ -30,7 +30,7 @@ angular.module('iprogApp')
           });
       };*/
 
-      $scope.sctest = function() {
+      $scope.scTest = function() {
         soundcloudfactory.ScTest();
       };
 
@@ -42,8 +42,8 @@ angular.module('iprogApp')
         soundcloudfactory.getSong();
       };
 
-      $scope.putDescription = function() {
+      /*$scope.putDescription = function() {
         soundcloudfactory.putDescription();
-      };
+      };*/
 
   });
