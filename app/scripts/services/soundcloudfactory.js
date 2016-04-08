@@ -9,12 +9,13 @@
 * Factory in the iprogApp.
 */
 angular.module('iprogApp')
-.factory('soundcloudfactory', function ($window, $q) {
+.factory('soundcloudfactory', function ($resource, $window, $q) {
 
     //var imageurl = "www.image.com";
-    /*var client_id = '927cd813d10aaf8f2040cd5ab3984734';
-    var redirect_uri = 'http://localhost:9000/sccallback.html';*/
+    var cl_id = '927cd813d10aaf8f2040cd5ab3984734';
+    var redirect_uri = 'http://localhost:9000/sccallback.html';
 
+    var Tracks = $resource('http://api.soundcloud.com/tracks?client_id='+cl_id+'&limit=10');
 
     // Public API here
     return {
@@ -35,21 +36,22 @@ angular.module('iprogApp')
         },
         getSong: function () {
             var track_url = 'https://soundcloud.com/hexagon/madison-mars-milky-way-radio-edit';
-            $window.SC.oEmbed(track_url, { auto_play: true }).then(function(response) {
+            $window.SC.oEmbed(track_url, { auto_play: false }).then(function(response) {
                 console.log('Object Response', response);
                 $window.alert('SoundCloud channel: ' + response.author_name + ', ' + 'Track name: ' + response.title);
             });
         },
-
+/*
         search: function() {
-            var deferred = $q.defer();
 
-            $window.SC.get('/tracks', {q:'fish', limit:2}).then(function(tracks) {
+            $window.SC.get('/tracks', {q:'fish', limit:11}).then(function(tracks) {
                 console.log(tracks);
-                deferred.resolve(tracks);
+                return (tracks);
             });
-            return $q.all({tracks: deferred.promise});
+        },*/
 
+        srch: function() {
+            
         }
 
 

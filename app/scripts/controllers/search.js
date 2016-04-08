@@ -10,11 +10,9 @@
 angular.module('iprogApp')
   .controller('SearchCtrl', function ($scope, $window, soundcloudfactory) {
 
-      $scope.testdata = soundcloudfactory.search();
+      $scope.testdata = soundcloudfactory.srch();
 
       console.log($scope.testdata);
-
-
 
 
 
