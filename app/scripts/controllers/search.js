@@ -8,10 +8,14 @@
  * Controller of the iprogApp
  */
 angular.module('iprogApp')
-  .controller('SearchCtrl', function ($scope) {
+  .controller('SearchCtrl', function ($scope, $window, soundcloudfactory) {
 
-    $scope.test = function() {
-            console.log("foof");
-    };
+      $scope.testdata = soundcloudfactory.search();
+
+      console.log($scope.testdata);
+
+
+
+
 
   });

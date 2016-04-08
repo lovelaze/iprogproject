@@ -16,8 +16,7 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'firebase',
-    'door3.css'
+    'firebase'
   ])
   .config(function ($routeProvider) {
     $routeProvider

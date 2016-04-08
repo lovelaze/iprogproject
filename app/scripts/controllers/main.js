@@ -8,7 +8,7 @@
  * Controller of the iprogApp
  */
 angular.module('iprogApp')
-  .controller('MainCtrl', function ($scope, $window, firebasefactory, soundcloudfactory) {
+  .controller('MainCtrl', function ($scope, $window, firebasefactory) {
 
       $scope.bajs = 'banankorv';
 

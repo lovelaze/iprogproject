@@ -1,3 +1,8 @@
+
+.song .title {
+    font-size: 10px;
+}
+
 .redglyph {
   color: red;
 }
@@ -102,6 +107,8 @@ body {
     border-bottom: 0;
   }
 }
+
+
 
 /* Adrian kod test för sidebar utseende bara
  * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
