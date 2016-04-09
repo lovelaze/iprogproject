@@ -6,45 +6,53 @@
   <div class="row">
       <div class="col-lg-12">
           <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search">
+              <input ng-model="searchInput" type="text" class="form-control" placeholder="Search">
               <span class="input-group-btn">
-                  <button ng-click="test()" type="submit" class="btn-sm btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                  <button ng-click="songQuery()" type="submit" class="btn-sm btn-default"><span class="glyphicon glyphicon-search"></span></button>
               </span>
           </div>
       </div>
   </div>
 
-  <div class="row" style="padding-top: 20px">
+  <div class="row" style="padding-top: 15px">
       <div class="col-lg-12">
-          <div class="input-group">
               <label class="checkbox-inline">
                   <input type="checkbox" name="optradio"> Free
               </label>
               <label class="checkbox-inline">
-                  <input type="time" min="0:00" max="100:59"></input> min-time
+                  <input class="form-control" type="number" min="0"></input> min-time
               </label>
               <label class="checkbox-inline">
-                  <input type="time"></input> max-time
+                  <input class="form-control" type="number" min="0"></input> max-time
               </label>
-              <label class="checkbox-inline">
-                  <button class="btn-sm btn-danger dropdown-toggle" type="button" data-toggle="dropdown">genres
-                    <span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                    <li><a href="">Rock</a></li>
-                    <li><a href="">Jazz</a></li>
-                    <li><a href="">Pop</a></li>
-                    </ul
-              </label>
-          </div>
+
       </div>
   </div>
+
+  <div class="row" style="padding-top: 15px">
+      <div class="col-lg-12">
+          <label class="checkbox-inline">
+              <button class="btn-sm btn-danger dropdown-toggle" type="button" data-toggle="dropdown">genres
+                <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                <li><a href="">Rock</a></li>
+                <li><a href="">Jazz</a></li>
+                <li><a href="">Pop</a></li>
+                </ul>
+          </label>
+          <label class="checkbox-inline">
+              <input class="form-control" ng-model="searchLimit" type="number" min="1" max="200"></input> limit
+          </label>
+      </div>
+  </div>
+
 </div>
 
 <div class="jumbotron">
-    <div data-ng-module="song"
-    <div class="row song" ng-repeat="song in testdata">
+    <div class="row song" ng-repeat="song in testdata" ng-if="song.downloadable != false">
         <div class="col-lg-12">
             <p class="title">{{song.title}}</p>
+            <iframe width="100%"  scrolling="no" frameborder="no" ng-src="{{trustSrc(getframe(song.uri))}}"></iframe
         </div>
     </div>
 </div>

@@ -25,11 +25,6 @@ angular
         controller: 'MainCtrl',
         controllerAs: 'main'
       })
-      .when('/about', {
-        templateUrl: 'views/search.html',
-        controller: 'SearchCtrl',
-        controllerAs: 'search'
-      })
       .when('/soundcloud', {
         templateUrl: 'views/soundcloud.html',
         controller: 'SoundcloudCtrl',
@@ -38,15 +33,12 @@ angular
       .when('/search', {
         templateUrl: 'views/search.html',
         controller: 'SearchCtrl',
-        controllerAs: 'search',
-        css: '/styles/search.css'
-
+        controllerAs: 'search'
       })
       .when('/profile', {
         templateUrl: 'views/profile.html',
         controller: 'ProfileCtrl',
-        controllerAs: 'profile',
-        css: '/styles/profile.css'
+        controllerAs: 'profile'
       })
       .otherwise({
         redirectTo: '/'

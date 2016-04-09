@@ -9,13 +9,13 @@
 * Factory in the iprogApp.
 */
 angular.module('iprogApp')
-.factory('soundcloudfactory', function ($resource, $window, $q) {
+.factory('soundcloudfactory', function ($window, $q) {
 
     //var imageurl = "www.image.com";
-    var cl_id = '927cd813d10aaf8f2040cd5ab3984734';
-    var redirect_uri = 'http://localhost:9000/sccallback.html';
+    //var cl_id = '927cd813d10aaf8f2040cd5ab3984734';
+    //var redirect_uri = 'http://localhost:9000/sccallback.html';
 
-    var Tracks = $resource('http://api.soundcloud.com/tracks?client_id='+cl_id+'&limit=10');
+
 
     // Public API here
     return {
@@ -41,18 +41,24 @@ angular.module('iprogApp')
                 $window.alert('SoundCloud channel: ' + response.author_name + ', ' + 'Track name: ' + response.title);
             });
         },
-/*
-        search: function() {
 
-            $window.SC.get('/tracks', {q:'fish', limit:11}).then(function(tracks) {
-                console.log(tracks);
-                return (tracks);
+
+        search: function(params) {
+
+            var deferred = $q.defer();
+
+            SC.get('/tracks', {q:params.term, limit:params.limit}).then(function(tracks) {
+                deferred.resolve( tracks);
             });
-        },*/
+            return deferred.promise;
+        },
 
-        srch: function() {
-            
+        createSongIframe: function(url) {
+            var iframe = 'https://w.soundcloud.com/player/?visual=false&url=' + url + '&show_artwork=true&auto_play=false';
+            return iframe;
         }
+
+
 
 
     };
