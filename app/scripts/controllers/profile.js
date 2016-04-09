@@ -15,6 +15,20 @@ angular.module('iprogApp')
       'Karma'
     ];
 
-    $scope.showContent = function(src) {
-      };
+    $scope.showContent = function(function_nr) {
+		document.getElementById('profinfo').style.display = "none";
+		document.getElementById('friends').style.display = "none";
+		document.getElementById('playlists').style.display = "none";
+		switch (function_nr) {
+		    case 0:
+		        document.getElementById('profinfo').style.display = "block";
+		        break;
+		    case 1:
+		        document.getElementById('friends').style.display = "block";
+		        break;
+		    case 2:
+		        document.getElementById('playlists').style.display = "block";
+		        break;
+		}
+	};
   });
