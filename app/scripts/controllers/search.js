@@ -15,11 +15,11 @@ angular.module('iprogApp')
 
       $scope.trustSrc = function(src) {
           return $sce.trustAsResourceUrl(src);
-      } 
+      };
 
 
       $scope.songQuery = function() {
-          var params = {'term':$scope.searchInput, 'limit':$scope.searchLimit};
+          var params = {'term':$scope.searchInput,'genre':$scope.genreInput, 'minbpm':$scope.minbpm, 'maxbpm':$scope.maxbpm, 'limit':$scope.searchLimit};
           soundcloudfactory.search(params).then(function(data) {
               $scope.testdata = data;
               console.log(data);
