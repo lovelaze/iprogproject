@@ -1,5 +1,51 @@
-<div id="wrapper">
-    <!-- Sidebar -->
+<h3 style="text-align: center" id="korv">This is the profile view.</h3>
+
+<div class="jumbotron">
+    <div class="navbar navbar-default" role="navigation">
+        <div class="container">
+          <div class="collapse navbar-collapse" id="js-navbar-collapse">
+
+            <ul id="navi" class="nav navbar-nav">
+              <li><a ng-href="#/profile" style="background:rgb(255,255,255);">Profile information</a></li>
+              <li><a ng-href="#/profile">Friends</a></li>
+              <li><a ng-href="#/profile">Playlists</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+</div>
+<div id="profinfo" class="jumbotron">
+    <p>Your personal information!</p>
+</div>
+<div id="friends" class="jumbotron">
+    Friend1
+    <hr>
+    Friend2
+    <hr>
+    Friend3
+</div>
+<div id="playlists" class="jumbotron">
+    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Nalle Puh soundtracks</button>
+    <div id="demo" class="collapse">
+        Songs for playlist one eller länk till en ny view för att spela upp spellistor typ
+        Spelbara låtar bör komma upp här som det blir när ni söker efter låtar!
+    </div>
+    <br>
+    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo2">Free Rock Music</button>
+    <div id="demo2" class="collapse">
+        Songs for playlist two
+        Spelbara låtar bör komma upp här som det blir när ni söker efter låtar!
+    </div>
+    <br>
+    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo3">Free Stone Music</button>
+    <div id="demo3" class="collapse">
+        Songs for playlist three
+        Spelbara låtar bör komma upp här som det blir när ni söker efter låtar!
+    </div>
+    <br>
+</div>
+<!--<div id="wrapper">
+    <!-- Sidebar --
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
@@ -24,9 +70,9 @@
             </li>
         </ul>
     </div>
-    <!-- /#sidebar-wrapper -->
+    <!-- /#sidebar-wrapper --
 
-    <!-- Page Content -->
+    <!-- Page Content --
     <div id="page-content-wrapper">
         <div class="container-fluid">
             <div class="row">
@@ -41,7 +87,7 @@
             </div>
         </div>
     </div>
-    <!-- /#page-content-wrapper -->
+    <!-- /#page-content-wrapper --
 
 </div>
 <!-- /#wrapper -->

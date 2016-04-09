@@ -8,10 +8,13 @@
  * Controller of the iprogApp
  */
 angular.module('iprogApp')
-  .controller('ProfileCtrl', function () {
+  .controller('ProfileCtrl', function ($scope) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
+
+    $scope.showContent = function(src) {
+      };
   });
