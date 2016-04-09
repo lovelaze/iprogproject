@@ -22,6 +22,7 @@
 
     <!-- Add your site or application content here -->
 
+    <!-- START HEADER -->
     <div class="header">
       <div class="navbar navbar-default" role="navigation">
         <div class="container">
@@ -31,7 +32,7 @@
 
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
 
-            <ul class="nav navbar-nav">
+            <ul id="navi" class="nav navbar-nav">
               <li class="active"><a href="#/">Home</a></li>
               <li><a ng-href="#/search">Search</a></li>
               <li><a ng-href="#/profile">Profile</a></li>
@@ -41,17 +42,19 @@
         </div>
       </div>
   </div>
+  <!-- END HEADER -->
 
     <div class="container">
         <div ng-view></div>
     </div>
 
-
+<!-- START FOOTER -->
     <div class="footer">
-      <div class="container">
-        <p><span class="glyphicon glyphicon-heart redglyph"></span> Kebab</p>
-      </div>
-  </div>
+        <div class="container">
+            <p><span class="glyphicon glyphicon-heart redglyph"></span> Kebab</p>
+        </div>
+    </div>
+  <!-- END FOOTER -->
 
 
     <!--<ng-include src="'partials/footer.html'"></ng-include>-->
@@ -104,5 +107,7 @@
     <script src="scripts/controllers/search.js"></script>
     <script src="scripts/controllers/profile.js"></script>
     <!-- endbuild -->
+
+    <script src="scripts/misc.js"></script>
 </body>
 </html>
