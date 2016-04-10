@@ -31,8 +31,8 @@ angular.module('iprogApp')
           _ref.child('playlists').set({
 
               ax14293a9sdf9: {
-                  bajs: 'name',
-                  name: 'bajs'
+                  song0: 'https://soundcloud.com/malibooze/bass',
+                  song1: 'https://soundcloud.com/karenthesiren/hello'
               }
 
           });
