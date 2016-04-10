@@ -1,22 +1,25 @@
-<h3 style="text-align: center" id="korv">This is the profile view.</h3>
+<h3 style="text-align: center" id="korv">Profile</h3>
 
 <div class="jumbotron">
     <div class="navbar navbar-default" role="navigation">
         <div class="container">
             <div class="collapse navbar-collapse" id="js-navbar-collapse">
                 <ul id="navi" class="nav navbar-nav">
-                    <li id="profile_tab1"><a ng-click="showContent(0)" ng-href="#/profile">Profile information</a></li>
+                    <li id="profile_tab1"><a ng-click="showContent(0)" ng-href="#/profile">My info</a></li>
                     <li id="profile_tab2"><a ng-click="showContent(1)" ng-href="#/profile">Friends</a></li>
                     <li id="profile_tab3"><a ng-click="showContent(2)" ng-href="#/profile">Playlists</a></li>
                 </ul>
             </div>
         </div>
     </div>
-    
+
     <!-- the main content -->
     <div id="profinfo">
-        <h2>This information will is visible for friends!</h2>
-        <p style="float:left">Your personal information!</p>
+        <h2 align="left">Edward Blom</h2>
+        <hr style="width: 100%; color: black; height: 1px; background-color:black;" />
+        <p1 style="float:left">Created playlists: 2</p1>
+        <br><br>
+        <p2 style="float:left">Total songs: 4</p2>
     </div>
     <div id="friends" style="display:none;">
         Friend1
