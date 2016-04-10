@@ -33,7 +33,7 @@ angular.module('iprogApp')
 	};
 
 	$scope.addPlaylist = function(){
-		var list = $scope.newPlaylist;
+		var listname = $scope.newPlaylist;
 		//add playlist name (empty) to firebase
 	};
   });
