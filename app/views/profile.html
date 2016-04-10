@@ -12,7 +12,7 @@
             </div>
         </div>
     </div>
-    <iframe id="song4" width="100%"  scrolling="no" frameborder="no" ng-src="{{trustSrc(getframe(karenthesiren/hello))}}"></iframe>
+    
     <!-- the main content -->
     <div id="profinfo">
         <h2>This information will is visible for friends!</h2>
@@ -20,7 +20,7 @@
     </div>
     <div id="friends" style="display:none;">
         Friend1
-        <hr>
+        <hr style="width: 100%; color: black; height: 1px; background-color:black;" />
         Friend2
         <hr>
         Friend3
@@ -34,27 +34,39 @@
         </div>
         <hr>
         <div data-toggle="collapse" data-target="#demo">
-            <h2>Nalle Puh soundtracks</h2>
+            <h2 align="left" style="font-weight: bold;">Nalle Puh soundtracks</h2>
         </div>
         <div id="demo" class="collapse">
             <div data-toggle="collapse" data-target="#song1">
-                <p>Hello (Adele) Spanglish Cover by Karen Rodriguez</p>
+                <p align="left">1. Hello (Adele) Spanglish Cover by Karen Rodriguez</p>
             </div>
-            <iframe id="song1" width="100%"  scrolling="no" frameborder="no" ng-src="{{trustSrc(getframe(karenthesiren/hello))}}"></iframe>
+            <div id="song1" class="col-lg-12">
+                <iframe width="100%"  scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?visual=false&amp;url=https://api.soundcloud.com/tracks/235399996&amp;show_artwork=true&amp;auto_play=false"></iframe>
+            </div>
             <div data-toggle="collapse" data-target="#song2">
-                <p>#Bass</p>
+                <p align="left">2. Linkin Park - Final Masquerade (Aviators Remix)</p>
             </div>
-            <!-- iframe 2-->
+            <div id="song2" class="col-lg-12">
+                <iframe width="100%"  scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?visual=false&amp;url=https://api.soundcloud.com/tracks/170703457&amp;show_artwork=true&amp;auto_play=false"></iframe>
+            </div>
         </div>
-        <br><hr>
+        <br><hr style="width: 100%; color: black; height: 1px; background-color:black;" />
         <div data-toggle="collapse" data-target="#demo2">
-            <h2>Only Bass</h2>
+            <h2 align="left" style="font-weight: bold;">Only Linkin Park!</h2>
         </div>
         <div id="demo2" class="collapse">
-            <div data-toggle="collapse" data-target="#song2">
-                <p>#Bass</p>
+            <div data-toggle="collapse" data-target="#song3">
+                <p align="left">1. Linkin Park - Final Masquerade (Aviators Remix)</p>
             </div>
-            <!-- iframe 1-->
+            <div id="song3" class="col-lg-12">
+                <iframe width="100%"  scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?visual=false&amp;url=https://api.soundcloud.com/tracks/170703457&amp;show_artwork=true&amp;auto_play=false"></iframe>
+            </div>
+            <div data-toggle="collapse" data-target="#song4">
+                <p align="left">2. Linkin Park - What I've Done (Alexis K Dubstep Remix)</p>
+            </div>
+            <div id="song4" class="col-lg-12">
+                <iframe width="100%"  scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?visual=false&amp;url=https://api.soundcloud.com/tracks/4339627&amp;show_artwork=true&amp;auto_play=false"></iframe>
+            </div>
         </div>
         <br>
         <!--<div data-toggle="collapse" data-target="#demo3">
