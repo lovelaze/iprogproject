@@ -7,7 +7,7 @@
  * # firebasefactory
  * Factory in the iprogApp.
  */
- 
+
 angular.module('iprogApp')
   .factory('firebasefactory', function ($window, $firebaseAuth) {
 
@@ -16,18 +16,6 @@ angular.module('iprogApp')
 
 
 /*    return {
-      someMethod: function () {
-        return 42;
-    },
-      addItem: function(item) {
-          _ref.push(item);
-      },
-      removeAll: function() {
-          _ref.remove();
-      },
-      getItem: function() {
-          console.log($firebaseObject(_ref));
-      },
       test: function() {
           _ref.child('playlists').set({
 
