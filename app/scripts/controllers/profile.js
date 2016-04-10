@@ -33,7 +33,24 @@ angular.module('iprogApp')
 	};
 
 	$scope.addPlaylist = function(){
-		var list = $scope.newPlaylist;
+		var listname = $scope.newPlaylist;
 		//add playlist name (empty) to firebase
+		var div = '<div><h2 align="left" style="font-weight: bold;">' + listname + '</h2></div><hr style="width: 100%; color: grey; height: 1px; background-color:grey;" />';
+		angular.element(document.querySelector('#playlists')).append(div);
+	};
+
+	$scope.testShowIframes = function(songnr){
+		var bool = true;
+		if(document.getElementById(songnr).style.display == "block"){
+			bool = false;
+		}
+		document.getElementById('song1').style.display = "none";
+		document.getElementById('song2').style.display = "none";
+		document.getElementById('song3').style.display = "none";
+		document.getElementById('song4').style.display = "none";
+
+		if(bool){
+			document.getElementById(songnr).style.display = "block";
+		}
 	};
   });
