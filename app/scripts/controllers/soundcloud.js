@@ -30,10 +30,6 @@ angular.module('iprogApp')
           });
       };*/
 
-      $scope.scTest = function() {
-        soundcloudfactory.ScTest();
-      };
-
       $scope.getUserName = function() {
         soundcloudfactory.getUserName();
       };
