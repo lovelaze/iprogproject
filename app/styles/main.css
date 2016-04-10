@@ -1,4 +1,18 @@
 
+
+.orange {
+  background-color: orange;
+}
+
+.ed {
+  background: url("/images/ed.jpg") no-repeat;
+  background-size: 100%;
+}
+
+.white {
+  background-color: white;
+}
+
 .song .title {
     font-size: 10px;
 }
