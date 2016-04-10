@@ -8,14 +8,52 @@
  * Controller of the iprogApp
  */
 angular.module('iprogApp')
-  .controller('MainCtrl', function ($scope, $window, firebasefactory, soundcloudfactory) {
+  .controller('MainCtrl', function ($scope, firebasefactory) {
+
+      var ref = new Firebase('https://dazzling-heat-875.firebaseio.com/');
 
       $scope.bajs = 'banankorv';
 
-      firebasefactory.test2();
 
-      $scope.scTest = function() {
-        soundcloudfactory.ScTest();
+      $scope.testreg = function() {
+          firebasefactory.$createUser({
+              email: $scope.email,
+              password: $scope.password
+          }).then(function(authData) {
+              console.log("Registered:", authData.uid);
+             ref.child("users").child(authData.uid).set({
+                name: $scope.email
+              });
+            }).catch(function(error) {
+              console.error("Error: ", error);
+            });
       };
+
+    $scope.testlogin = function() {
+        firebasefactory.$authWithPassword({
+          email: $scope.email,
+          password: $scope.password
+        }).then(function(authData) {
+          console.log("Logged in as:", authData.uid);
+        }).catch(function(error) {
+          console.error("Authentication failed:", error);
+        });
+    };
+
+
+    $scope.testlogout = function() {
+        firebasefactory.$unauth();
+    };
+
+
+    $scope.testinfo = function() {
+        var authData = firebasefactory.$getAuth();
+        if (authData) {
+          console.log("User " + authData.uid + ", " + authData.password.email + ", is logged in with " + authData.provider);
+        } else {
+          console.log("User is logged out");
+        }
+    };
+
 
   });
