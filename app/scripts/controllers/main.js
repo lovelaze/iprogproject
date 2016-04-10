@@ -8,7 +8,7 @@
  * Controller of the iprogApp
  */
 angular.module('iprogApp')
-  .controller('MainCtrl', function ($scope, firebasefactory) {
+  .controller('MainCtrl', function ($scope, $location, $window, firebasefactory) {
 
       var ref = new Firebase('https://dazzling-heat-875.firebaseio.com/');
 
@@ -21,11 +21,13 @@ angular.module('iprogApp')
               password: $scope.password
           }).then(function(authData) {
               console.log("Registered:", authData.uid);
+              $window.alert("Registered");
              ref.child("users").child(authData.uid).set({
                 name: $scope.email
               });
             }).catch(function(error) {
               console.error("Error: ", error);
+              $window.alert(error);
             });
       };
 
@@ -35,14 +37,19 @@ angular.module('iprogApp')
           password: $scope.password
         }).then(function(authData) {
           console.log("Logged in as:", authData.uid);
+          $location.path("/search");
+          $window.alert("Logged in!");
+
         }).catch(function(error) {
           console.error("Authentication failed:", error);
+          $window.alert("Authentication failed");
         });
     };
 
 
     $scope.testlogout = function() {
         firebasefactory.$unauth();
+        $window.alert("Logged out!");
     };
 
 

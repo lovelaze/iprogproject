@@ -19,7 +19,7 @@ angular.module('iprogApp')
 
 
       $scope.songQuery = function() {
-          var params = {'term':$scope.searchInput,'genre':$scope.genreInput, 'minbpm':$scope.minbpm, 'maxbpm':$scope.maxbpm, 'limit':$scope.searchLimit};
+          var params = {'term':$scope.searchInput,'genre':$scope.genreInput, 'minbpm':$scope.minbpm, 'maxbpm':$scope.maxbpm, 'limit':30};
           soundcloudfactory.search(params).then(function(data) {
               $scope.testdata = data;
               console.log(data);
