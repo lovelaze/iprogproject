@@ -35,5 +35,6 @@ angular.module('iprogApp')
 	$scope.addPlaylist = function(){
 		var listname = $scope.newPlaylist;
 		//add playlist name (empty) to firebase
+		angular.element(document.querySelector('#playlists')).append(div);
 	};
   });
