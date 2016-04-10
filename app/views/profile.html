@@ -15,11 +15,10 @@
 
     <!-- the main content -->
     <div id="profinfo">
-        <p>Your personal information!</p>
+        <h2>This information will is visible for friends!</h2>
+        <p style="float:left">Your personal information!</p>
     </div>
     <div id="friends" style="display:none;">
-        Need firebase data here if you for potential friends
-        <br>
         Friend1
         <hr>
         Friend2
@@ -27,21 +26,32 @@
         Friend3
     </div>
     <div id="playlists" style="display:none;">
-        <button class="btn btn-info">Add new playlist</button>
+        <div class="input-group">
+            <input ng-model="newPlaylist" type="text" class="form-control" placeholder="Playlist name">
+            <span class="input-group-btn">
+                <button ng-click="addPlaylist()" type="submit" class="btn-sm btn-default">Add playlist</button>
+            </span>
+        </div>
         <hr>
-        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Nalle Puh soundtracks</button>
+        <div data-toggle="collapse" data-target="#demo">
+            <h2>Nalle Puh soundtracks</h2>
+        </div>
         <div id="demo" class="collapse">
             Songs for playlist one eller länk till en ny view för att spela upp spellistor typ
             Spelbara låtar bör komma upp här som det blir när ni söker efter låtar!
         </div>
-        <br>
-        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo2">Free Rock Music</button>
+        <br><hr>
+        <div data-toggle="collapse" data-target="#demo2">
+            <h2>Free Rock Music</h2>
+        </div>
         <div id="demo2" class="collapse">
             Songs for playlist two
             Spelbara låtar bör komma upp här som det blir när ni söker efter låtar!
         </div>
-        <br>
-        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo3">Free Stone Music</button>
+        <br><hr>
+        <div data-toggle="collapse" data-target="#demo3">
+            <h2>Free Stone Music</h2>
+        </div>
         <div id="demo3" class="collapse">
             Songs for playlist three
             Spelbara låtar bör komma upp här som det blir när ni söker efter låtar!

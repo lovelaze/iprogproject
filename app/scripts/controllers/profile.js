@@ -31,4 +31,9 @@ angular.module('iprogApp')
 		        break;
 		}
 	};
+
+	$scope.addPlaylist = function(){
+		var list = $scope.newPlaylist;
+		//add playlist name (empty) to firebase
+	};
   });
