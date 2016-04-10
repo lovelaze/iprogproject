@@ -1,3 +1,5 @@
+// jscs:disable requireCamelCaseOrUpperCaseIdentifiers
+
 'use strict';
 
 /**
@@ -41,7 +43,7 @@ angular.module('iprogApp')
 
 	$scope.testShowIframes = function(songnr){
 		var bool = true;
-		if(document.getElementById(songnr).style.display == "block"){
+		if(document.getElementById(songnr).style.display === "block"){
 			bool = false;
 		}
 		document.getElementById('song1').style.display = "none";
