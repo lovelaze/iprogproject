@@ -22,7 +22,7 @@ angular.module('iprogApp')
           }).then(function(authData) {
               console.log("Registered:", authData.uid);
               $window.alert("Registered");
-             ref.child("users").child(authData.uid).set({
+              ref.child("users").child(authData.uid).set({
                 name: $scope.email
               });
             }).catch(function(error) {
@@ -50,6 +50,7 @@ angular.module('iprogApp')
     $scope.testlogout = function() {
         firebasefactory.$unauth();
         $window.alert("Logged out!");
+        $location.path("/home");
     };
 
 
