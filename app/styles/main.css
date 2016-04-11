@@ -1,4 +1,7 @@
-
+.mainbutton {
+  border: thin groove #000000;
+  vertical-align: bottom;
+}
 
 .orange {
   background-color: orange;
