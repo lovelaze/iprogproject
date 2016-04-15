@@ -12,6 +12,31 @@ angular.module('iprogApp')
 
       $scope.searchLimit = 10;
 
+      $scope.songs = [];
+      $scope.filteredSongs = [];
+      $scope.currentPage = 1;
+      $scope.maxSize = 5;
+      $scope.songsPerPage = 5;
+
+      $scope.createPages = function(){
+        $scope.songs = [];
+        for (var i=1;i<=1000;i++) {
+          $scope.songs.push({ text:"song "+i, done:false});
+        }
+      };
+      $scope.createPages();
+
+      $scope.$watch("currentPage + songsPerPage", function() {
+        var begin = (($scope.currentPage - 1) * $scope.songsPerPage);
+        var end = begin + $scope.songsPerPage;
+        $scope.filteredSongs = $scope.songs.slice(begin, end);
+      });
+
+      $scope.numPages = function () {
+          return Math.ceil($scope.songs.length / $scope.songsPerPage);
+      };
+
+
 
       $scope.trustSrc = function(src) {
           return $sce.trustAsResourceUrl(src);

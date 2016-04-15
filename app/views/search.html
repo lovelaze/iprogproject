@@ -70,3 +70,11 @@
         </div>
     </div>
 </div>
+
+
+<ul>
+    <li ng-repeat="song in filteredSongs">{{song.text}}</li>
+</ul>
+
+<pagination ng-model="currentPage" total-items="songs.length" max-size="maxSize" boundary-links="true">
+</pagination>
