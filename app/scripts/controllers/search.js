@@ -20,18 +20,19 @@ angular.module('iprogApp')
 
       var ref = new Firebase('https://dazzling-heat-875.firebaseio.com/playlists');
 
-      $scope.testArray = function(url) {
+      $scope.addSongToPlaylist = function(url) {
           var playlistRef = ref.child("playlist1");
-          var newPlaylistRef = playlistRef.push();
+          // var newPlaylistRef = playlistRef.push();
 
-          var song = soundcloudfactory.createSongIframe(url);
+          // Convert track uri to an iframe link for that track
+          var track = soundcloudfactory.createSongIframe(url);
 
-          console.log("fetched song is", song);
+          console.log("fetched track is", track);
           playlistRef.set({
-              song1: song,
+              track1: track,
           });
 
-          console.log("Adding more playlists!");
+          console.log("Adding to song1 in playlist1!");
       }
 
       $scope.createPages = function(){
