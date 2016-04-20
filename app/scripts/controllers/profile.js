@@ -17,6 +17,21 @@ angular.module('iprogApp')
       'Karma'
     ];
 
+    var ref = new Firebase('https://dazzling-heat-875.firebaseio.com/playlists');
+
+    $scope.addPlaylistToFirebase = function() {
+      //maybe use firebase array for this shit
+      var listname = $scope.newPlaylist;
+      var refplaylists = ref.child("playlists");
+
+      ref.child(listname).set({
+          //need to get logged in user
+          user: "random",
+      });
+
+      console.log("Added playlist:", listname);
+    }
+
     $scope.showContent = function(function_nr) {
 		document.getElementById('profinfo').style.display = "none";
 		document.getElementById('friends').style.display = "none";
