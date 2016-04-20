@@ -18,6 +18,22 @@ angular.module('iprogApp')
       $scope.maxSize = 5;
       $scope.songsPerPage = 5;
 
+      var ref = new Firebase('https://dazzling-heat-875.firebaseio.com/playlists');
+
+      $scope.testArray = function(url) {
+          var playlistRef = ref.child("playlist1");
+          var newPlaylistRef = playlistRef.push();
+
+          var song = soundcloudfactory.createSongIframe(url);
+
+          console.log("fetched song is", song);
+          playlistRef.set({
+              song1: song,
+          });
+
+          console.log("Adding more playlists!");
+      }
+
       $scope.createPages = function(){
         $scope.songs = [];
         for (var i=1;i<=1000;i++) {
