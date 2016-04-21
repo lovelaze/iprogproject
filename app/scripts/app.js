@@ -10,7 +10,7 @@
  */
 angular
   .module('iprogApp', [
-    'ngAnimate',
+    
     'ngCookies',
     'ngResource',
     'ngRoute',

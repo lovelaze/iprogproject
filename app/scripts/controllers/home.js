@@ -11,11 +11,9 @@ angular.module('iprogApp')
   .controller('HomeCtrl', function ($scope, $location, firebasefactory) {
 
     $scope.explore = function() {
-        if($scope.testlogin() === true){
-            $location.path("/search");
-        }else{
+
             $location.path("/main");
-        }
+        
     };
 
     $scope.testlogin = function() {

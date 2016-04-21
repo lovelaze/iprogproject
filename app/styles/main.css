@@ -1,3 +1,7 @@
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}
+
 .mainbutton {
   border: thin groove #000000;
   vertical-align: bottom;

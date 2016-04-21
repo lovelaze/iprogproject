@@ -23,36 +23,38 @@
     <!-- Add your site or application content here -->
 
     <!-- START HEADER -->
-    <div class="header">
+    <div ng-controller="HeaderCtrl" class="header">
       <div class="navbar navbar-default" role="navigation">
         <div class="container">
           <div class="navbar-header">
             <p class="navbar-brand">SoundCloud Downloader</p>
           </div>
 
-          <div class="collapse navbar-collapse" id="js-navbar-collapse">
+          <div  class="collapse navbar-collapse" id="js-navbar-collapse">
 
             <ul id="navi" class="nav navbar-nav">
               <li class=""><a href="#/">Home</a></li>
-              <li><a ng-href="#/search">Search</a></li>
-              <li><a ng-href="#/profile">Profile</a></li
+              <li ng-if="IsLoggedIn()" ng-cloak><a ng-href="#/search">Search</a></li>
+              <li ng-if="IsLoggedIn()" ng-cloak><a ng-href="#/profile">Profile</a></li>
+              <li ng-if="IsLoggedIn()" ng-cloak><a ng-href=""><b>{{authData.password.email}}</b></a></li>
             </ul>
           </div>
         </div>
       </div>
   </div>
   <!-- END HEADER -->
-    <div class="container">
-        <div ng-view></div>
-    </div>
+
+<div class="container">
+    <div ng-view></div>
+</div>
 
 <!-- START FOOTER -->
-  <!--  <div class="footer">
-        <div class="container">
-            <p style="text-align:center"><span class="glyphicon glyphicon-cloud-download"></span> SoundCloud Downloader</p>
-        </div>
+ <div class="footer">
+    <div class="container">
+        <p style="text-align:center"><span class="glyphicon glyphicon-cloud-download"></span> SoundCloud Downloader</p>
     </div>
-  -->
+</div>
+
   <!-- END FOOTER -->
 
 
@@ -105,6 +107,8 @@
     <script src="scripts/controllers/search.js"></script>
     <script src="scripts/controllers/profile.js"></script>
     <script src="scripts/controllers/home.js"></script>
+    <script src="scripts/services/userservice.js"></script>
+    <script src="scripts/controllers/header.js"></script>
     <!-- endbuild -->
 
     <script src="scripts/misc.js"></script>
