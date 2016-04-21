@@ -37,6 +37,7 @@
               <li ng-show="IsLoggedIn()" ng-cloak><a ng-href="#/search">Search</a></li>
               <li ng-show="IsLoggedIn()" ng-cloak><a ng-href="#/profile">Profile</a></li>
               <li ng-show="IsLoggedIn()" ng-cloak><a ng-href=""><b>{{authData.password.email}}</b></a></li>
+              <button ng-show="!IsLoggedIn()" ng-click="loginreg()" type="submit" class="btn btn-default test">Login/Register</button>
               <button ng-show="IsLoggedIn()" ng-cloak ng-click="logout()" type="submit" class="btn btn-danger test">Logout</button>
             </ul>
           </div>

@@ -33,7 +33,7 @@ angular.module('iprogApp')
           });
 
           console.log("Adding to song1 in playlist1!");
-      }
+      };
 
       $scope.createPages = function(){
         $scope.songs = [];

@@ -22,15 +22,15 @@ angular.module('iprogApp')
     $scope.addPlaylistToFirebase = function() {
       //maybe use firebase array for this shit
       var listname = $scope.newPlaylist;
-      var refplaylists = ref.child("playlists");
+      //var refplaylists = ref.child("playlists");
 
       ref.child(listname).set({
           //need to get logged in user
-          user: "random",
+          user: "random"
       });
 
       console.log("Added playlist:", listname);
-    }
+    };
 
     $scope.showContent = function(function_nr) {
 		document.getElementById('profinfo').style.display = "none";

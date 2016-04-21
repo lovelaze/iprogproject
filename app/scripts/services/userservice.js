@@ -8,7 +8,7 @@
  * Service in the iprogApp.
  */
 angular.module('iprogApp')
-  .service('UserService', function (firebasefactory) {
+  .service('UserService', function () {
 
      this.loggedIn = false;
 

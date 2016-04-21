@@ -10,12 +10,6 @@
 angular.module('iprogApp')
   .controller('HomeCtrl', function ($scope, $location, firebasefactory) {
 
-    $scope.explore = function() {
-
-            $location.path("/main");
-        
-    };
-
     $scope.testlogin = function() {
         var authData = firebasefactory.$getAuth();
         if (authData) {

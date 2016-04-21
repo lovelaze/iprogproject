@@ -10,7 +10,7 @@
 angular.module('iprogApp')
   .controller('HeaderCtrl', function ($scope, $location, UserService, firebasefactory) {
 
-      $scope.authData = firebasefactory.$getAuth()
+      $scope.authData = firebasefactory.$getAuth();
       if ($scope.authData){
           UserService.loggedIn = true;
       } else {
@@ -25,6 +25,10 @@ angular.module('iprogApp')
           firebasefactory.$unauth();
           UserService.loggedIn = false;
           $location.path("/home");
+      };
+
+      $scope.loginreg = function() {
+          $location.path("/main");
       };
 
 
