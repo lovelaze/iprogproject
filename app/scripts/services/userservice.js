@@ -11,6 +11,7 @@ angular.module('iprogApp')
   .service('UserService', function () {
 
      this.loggedIn = false;
+     this.authData = undefined;
 
 
 

@@ -35,7 +35,7 @@ angular.module('iprogApp')
           password: $scope.password
         }).then(function(authData) {
             UserService.loggedIn = true;
-            $scope.authData = authData;
+            UserService.authData = authData;
           console.log("Logged in as:", authData.uid);
           $location.path("/search");
           //$window.alert("Logged in!");

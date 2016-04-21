@@ -58,6 +58,15 @@ angular.module('iprogApp')
         createSongIframe: function(url) {
             var iframe = 'https://w.soundcloud.com/player/?visual=false&url=' + url + '&show_artwork=true&auto_play=false';
             return iframe;
+        },
+
+        testPaging: function() {
+            console.log('fisk');
+            var deferred = $q.defer();
+            SC.get('/tracks', {limit:200, linked_partitioning:1, offset:6000}).then(function(tracks)  {
+                 deferred.resolve( tracks);
+            });
+            return deferred.promise;
         }
 
 

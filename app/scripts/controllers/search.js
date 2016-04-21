@@ -20,6 +20,12 @@ angular.module('iprogApp')
 
       var ref = new Firebase('https://dazzling-heat-875.firebaseio.com/playlists');
 
+      $scope.testPaging = function() {
+          soundcloudfactory.testPaging().then(function(data) {
+              console.log(data);
+          });
+      };
+
       $scope.addSongToPlaylist = function(url) {
           var playlistRef = ref.child("playlist1");
           // var newPlaylistRef = playlistRef.push();
