@@ -8,18 +8,23 @@
  * Controller of the iprogApp
  */
 angular.module('iprogApp')
-  .controller('HeaderCtrl', function ($scope, UserService, firebasefactory) {
+  .controller('HeaderCtrl', function ($scope, $location, UserService, firebasefactory) {
 
       $scope.authData = firebasefactory.$getAuth()
       if ($scope.authData){
           UserService.loggedIn = true;
-          console.log($scope.authData);
       } else {
           UserService.loggedIn = false;
       }
 
       $scope.IsLoggedIn = function() {
           return UserService.loggedIn;
+      };
+
+      $scope.logout = function() {
+          firebasefactory.$unauth();
+          UserService.loggedIn = false;
+          $location.path("/home");
       };
 
 

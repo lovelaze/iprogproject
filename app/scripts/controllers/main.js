@@ -34,9 +34,8 @@ angular.module('iprogApp')
           email: $scope.email,
           password: $scope.password
         }).then(function(authData) {
-            console.log(UserService.loggedIn);
             UserService.loggedIn = true;
-            console.log(UserService.loggedIn);
+            $scope.authData = authData;
           console.log("Logged in as:", authData.uid);
           $location.path("/search");
           //$window.alert("Logged in!");
@@ -48,11 +47,7 @@ angular.module('iprogApp')
     };
 
 
-    $scope.testlogout = function() {
-        firebasefactory.$unauth();
-        UserService.loggedIn = false;
-        $location.path("/home");
-    };
+
 
 
     $scope.testinfo = function() {

@@ -2,6 +2,11 @@
   display: none !important;
 }
 
+.test {
+    margin-bottom: 30px;
+    margin-top: 10px;
+}
+
 .mainbutton {
   border: thin groove #000000;
   vertical-align: bottom;

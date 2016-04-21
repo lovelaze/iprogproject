@@ -34,9 +34,10 @@
 
             <ul id="navi" class="nav navbar-nav">
               <li class=""><a href="#/">Home</a></li>
-              <li ng-if="IsLoggedIn()" ng-cloak><a ng-href="#/search">Search</a></li>
-              <li ng-if="IsLoggedIn()" ng-cloak><a ng-href="#/profile">Profile</a></li>
-              <li ng-if="IsLoggedIn()" ng-cloak><a ng-href=""><b>{{authData.password.email}}</b></a></li>
+              <li ng-show="IsLoggedIn()" ng-cloak><a ng-href="#/search">Search</a></li>
+              <li ng-show="IsLoggedIn()" ng-cloak><a ng-href="#/profile">Profile</a></li>
+              <li ng-show="IsLoggedIn()" ng-cloak><a ng-href=""><b>{{authData.password.email}}</b></a></li>
+              <button ng-show="IsLoggedIn()" ng-cloak ng-click="logout()" type="submit" class="btn btn-danger test">Logout</button>
             </ul>
           </div>
         </div>

@@ -10,7 +10,7 @@
  */
 angular
   .module('iprogApp', [
-    
+
     'ngCookies',
     'ngResource',
     'ngRoute',
@@ -20,7 +20,7 @@ angular
   ])
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/main', {
+      .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         controllerAs: 'main'
@@ -44,12 +44,12 @@ angular
           return firebasefactory.$requireAuth();
         }]
         }
-      })
+    })/*
       .when('/', {
         templateUrl: 'views/home.html',
         controller: 'HomeCtrl',
         controllerAs: 'home'
-      })
+    })*/
       .otherwise({
         redirectTo: '/'
       });
@@ -58,7 +58,7 @@ angular
       // We can catch the error thrown when the $requireAuth promise is rejected
       // and redirect the user back to the home page
       if (error === "AUTH_REQUIRED") {
-        $location.path("/home");
+        $location.path("/");
       }
     });
 }]);
