@@ -10,7 +10,7 @@
  * Controller of the iprogApp
  */
 angular.module('iprogApp')
-  .controller('ProfileCtrl', function ($scope) {
+  .controller('ProfileCtrl', function ($scope, UserService) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -24,9 +24,14 @@ angular.module('iprogApp')
       var listname = $scope.newPlaylist;
       //var refplaylists = ref.child("playlists");
 
+      console.log(UserService.authData.password.email);
+      var username = UserService.authData.password.email;
+      var divided = username.split(/@/);
+      var justname = divided[0];
+      console.log(justname);
       ref.child(listname).set({
           //need to get logged in user
-          user: "random"
+          user: justname
       });
 
       console.log("Added playlist:", listname);

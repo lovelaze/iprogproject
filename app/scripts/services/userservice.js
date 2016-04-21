@@ -13,8 +13,6 @@ angular.module('iprogApp')
      this.loggedIn = false;
      this.authData = undefined;
 
-
-
-
     // AngularJS will instantiate a singleton by calling "new" on this function
+
   });
