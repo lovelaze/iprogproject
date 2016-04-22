@@ -77,7 +77,9 @@
     <li ng-repeat="song in filteredSongs">{{song.text}}</li>
 </ul>
 
-<button ng-click="testPaging()" class="btn-sm btn-default">paging</button>
+<div data-pagination="" data-num-pages="numPages()" data-current-page="currentPage" data-max-size="maxSize" data-boundary-links="true">
+</div>
 
-<pagination ng-model="currentPage" total-items="songs.length" max-size="maxSize" boundary-links="true">
-</pagination>
+
+
+<button ng-click="testPaging()" class="btn-sm btn-default">paging</button>
