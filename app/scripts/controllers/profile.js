@@ -31,7 +31,10 @@ angular.module('iprogApp')
         user: username,
         songs: {song: "https://w.soundcloud.com/player/?visual=false&url=https://api.soundcloud.com/tracks/53437625&show_artwork=true&auto_play=false"}
       });
+
+      //test method for adding firebase data to scope variable
       $scope.getPlaylist();
+
       console.log("Added playlist:", listname);
       console.log($scope.listObjects);
     };
@@ -43,7 +46,6 @@ angular.module('iprogApp')
           //get data inside each playlist
           var childdata = childSnapshot.val();
           //var userN = childdata.user;
-          testdatalist.push(childdata);
           console.log(childdata);
         });
       });
