@@ -31,10 +31,22 @@ angular.module('iprogApp')
       console.log(justname);
       ref.child(listname).set({
           //need to get logged in user
-          user: justname
+          user: username
       });
-
+      $scope.getPlaylist();
       console.log("Added playlist:", listname);
+    };
+
+    $scope.getPlaylist = function() {
+      ref.once("value", function(snapshot){
+        //each playlist
+        snapshot.forEach(function(childSnapshot){
+          //get data inside each playlist
+          var childdata = childSnapshot.val();
+          var userN = childdata.user;
+          console.log(childdata);
+        });
+      });
     };
 
     $scope.showContent = function(function_nr) {
