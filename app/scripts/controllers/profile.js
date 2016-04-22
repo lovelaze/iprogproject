@@ -22,19 +22,18 @@ angular.module('iprogApp')
     $scope.addPlaylistToFirebase = function() {
       //maybe use firebase array for this shit
       var listname = $scope.newPlaylist;
-      //var refplaylists = ref.child("playlists");
 
       console.log(UserService.authData.password.email);
       var username = UserService.authData.password.email;
-      var divided = username.split(/@/);
-      var justname = divided[0];
-      console.log(justname);
-      ref.child(listname).set({
-          //need to get logged in user
-          user: username
+      //pushing to add specific if to each playlist
+      ref.push({
+        name: listname,
+        user: username,
+        songs: {song: "https://w.soundcloud.com/player/?visual=false&url=https://api.soundcloud.com/tracks/53437625&show_artwork=true&auto_play=false"}
       });
       $scope.getPlaylist();
       console.log("Added playlist:", listname);
+      console.log($scope.listObjects);
     };
 
     $scope.getPlaylist = function() {
@@ -43,7 +42,8 @@ angular.module('iprogApp')
         snapshot.forEach(function(childSnapshot){
           //get data inside each playlist
           var childdata = childSnapshot.val();
-          var userN = childdata.user;
+          //var userN = childdata.user;
+          testdatalist.push(childdata);
           console.log(childdata);
         });
       });
