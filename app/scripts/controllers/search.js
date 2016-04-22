@@ -10,6 +10,14 @@
 angular.module('iprogApp')
   .controller('SearchCtrl', function ($scope, soundcloudfactory, $sce) {
 
+      $scope.downloadables = [];
+      $scope.pageList = [];
+
+      $scope.maxSize = 100;
+      $scope.totalItems = 175;
+      $scope.currentPage = 1;
+      $scope.itemsPerPage = 5;
+
       $scope.searchLimit = 10;
 
       $scope.songs = [];
@@ -19,12 +27,6 @@ angular.module('iprogApp')
       $scope.songsPerPage = 5;
 
       var ref = new Firebase('https://dazzling-heat-875.firebaseio.com/playlists');
-
-      $scope.testPaging = function() {
-          soundcloudfactory.testPaging().then(function(data) {
-              console.log(data);
-          });
-      };
 
       $scope.addSongToPlaylist = function(url) {
           var playlistRef = ref.child("playlist1");
@@ -42,7 +44,6 @@ angular.module('iprogApp')
       };
 
       $scope.createPages = function(){
-        $scope.songs = [];
         for (var i=1;i<=1000;i++) {
           $scope.songs.push({ text:"song "+i, done:false});
         }
@@ -67,15 +68,43 @@ angular.module('iprogApp')
 
 
       $scope.songQuery = function() {
-          var params = {'term':$scope.searchInput,'genre':$scope.genreInput, 'minbpm':$scope.minbpm, 'maxbpm':$scope.maxbpm, 'limit':30};
+          var params = {'term':$scope.searchInput,'genre':$scope.genreInput, 'minbpm':$scope.minbpm, 'maxbpm':$scope.maxbpm, 'limit':200};
           soundcloudfactory.search(params).then(function(data) {
-              $scope.testdata = data;
-              console.log(data);
+              $scope.downloadables = [];
+
+              data.forEach(function(track) {
+                  if (track.downloadable) {
+                      $scope.downloadables.push(track);
+                  }
+              });
+
+              $scope.totalItems = $scope.downloadables.length;
+
+              if ($scope.downloadables.length == 0) {
+                  $scope.pageList = [];
+              } else {
+                  updatePage(1);
+              }
+
           });
       };
 
       $scope.getframe = function(url) {
           return soundcloudfactory.createSongIframe(url);
+      };
+
+      var updatePage = function(page) {
+          $scope.currentPage = page;
+          var begin = ($scope.currentPage - 1) * $scope.itemsPerPage;
+          var end = begin + $scope.itemsPerPage;
+          if ($scope.downloadables.length - end < 0) {
+              end = $scope.downloadables.length;
+          }
+          $scope.pageList = $scope.downloadables.slice(begin, end);
+      };
+
+      $scope.pageChange = function() {
+          updatePage($scope.currentPage);
       };
 
 
