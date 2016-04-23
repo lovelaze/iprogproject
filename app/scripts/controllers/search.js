@@ -43,9 +43,8 @@ angular.module('iprogApp')
           var userRef = refU.child(UserService.authData.uid);
           var plUserRef = userRef.child('playlists');
           plUserRef.once("value", function(snapshot) {
-          // The callback function will get called twice, once for "fred" and once for "barney"
+              
           snapshot.forEach(function(childSnapshot) {
-            // key will be "fred" the first time and "barney" the second time
             var tuple = {'id':childSnapshot.key(), 'name':childSnapshot.val()}
             $scope.playlists.push(tuple);
           });
@@ -56,27 +55,9 @@ angular.module('iprogApp')
 
 
       $scope.addSongToPlaylist = function(song, playlistId) {
-          //var playlistRef = ref.child("playlist1");
           var listRef = refP.child(playlistId).child('songs');
           listRef.child(song.id).set(song.title);
 
-
-          // var newPlaylistRef = playlistRef.push();
-
-          // Convert track uri to an iframe link for that track
-
-
-          //var track = soundcloudfactory.createSongIframe(url);
-
-
-          /*
-          console.log("fetched track is", track);
-          playlistRef.set({
-              track1: track,
-          });
-          */
-
-          //listRef.push({'track' : track});
       };
 
       $scope.createPages = function(){
