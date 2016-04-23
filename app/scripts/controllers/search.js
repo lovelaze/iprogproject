@@ -12,24 +12,20 @@ angular.module('iprogApp')
 
       $scope.downloadables = [];
       $scope.pageList = [];
+      $scope.playlists = [];
 
       $scope.maxSize = 100;
       $scope.totalItems = 175;
       $scope.currentPage = 1;
       $scope.itemsPerPage = 5;
+      $scope.songsPerPage = 5;
 
       $scope.searchLimit = 10;
-
-      $scope.songs = [];
-      $scope.filteredSongs = [];
-      $scope.currentPage = 1;
-      $scope.maxSize = 5;
-      $scope.songsPerPage = 5;
 
       $scope.mstep = 1;
       $scope.sstep = 1;
 
-      $scope.playlists = [];
+
 
       var refP = new Firebase('https://dazzling-heat-875.firebaseio.com/playlists');
       var refU = new Firebase('https://dazzling-heat-875.firebaseio.com/users');
@@ -43,9 +39,9 @@ angular.module('iprogApp')
           var userRef = refU.child(UserService.authData.uid);
           var plUserRef = userRef.child('playlists');
           plUserRef.once("value", function(snapshot) {
-              
+
           snapshot.forEach(function(childSnapshot) {
-            var tuple = {'id':childSnapshot.key(), 'name':childSnapshot.val()}
+            var tuple = {'id':childSnapshot.key(), 'name':childSnapshot.val()};
             $scope.playlists.push(tuple);
           });
         });
