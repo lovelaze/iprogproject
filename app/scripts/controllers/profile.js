@@ -10,10 +10,11 @@
  * Controller of the iprogApp
  */
 angular.module('iprogApp')
-  .controller('ProfileCtrl', function ($scope, UserService) {
+  .controller('ProfileCtrl', function ($scope, UserService, firebasefactory) {
 
     var ref = new Firebase('https://dazzling-heat-875.firebaseio.com/playlists');
     var refusers = new Firebase('https://dazzling-heat-875.firebaseio.com/users');
+    UserService.authData = firebasefactory.$getAuth();
 
     $scope.addPlaylistToFirebase = function() {
       //maybe use firebase array for this shit
@@ -52,16 +53,20 @@ angular.module('iprogApp')
       });
     };
 
+    $scope.getUsername = function() {
+        return UserService.authData;
+    };
+
     $scope.getPlaylistCount = function() {
-      var num = 0;
-      ref.on("value", function(snapshot) {
-        num = snapshot.numChildren();
-      });
-      if (num > 0) {
-        return num;
-      } else {
-        return NaN;
-      }
+        var num = 0;
+        ref.on("value", function(snapshot) {
+            num = snapshot.numChildren();
+        });
+        if (num > 0) {
+            return num;
+        } else {
+            return NaN;
+        }
     };
 
     $scope.getSongsCount = function() {

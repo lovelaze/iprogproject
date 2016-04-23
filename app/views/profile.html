@@ -5,7 +5,7 @@
         <div class="container">
             <div class="collapse navbar-collapse" id="js-navbar-collapse">
                 <ul id="navi" class="nav navbar-nav">
-                    <li id="profile_tab1"><a ng-click="showContent(0)" ng-href="#/profile">My info</a></li>
+                    <li id="profile_tab1"><a ng-click="showContent(0)" ng-href="#/profile">My Info</a></li>
                     <li id="profile_tab2"><a ng-click="showContent(1)" ng-href="#/profile">Friends</a></li>
                     <li id="profile_tab3"><a ng-click="showContent(2)" ng-href="#/profile">Playlists</a></li>
                 </ul>
@@ -15,7 +15,7 @@
 
     <!-- the main content -->
     <div id="profinfo">
-        <h2 align="left" style="font-weight: bold;">Edward Blom</h2>
+        <h2 align="left" style="font-weight: bold;">{{getUsername().password.email}}</h2>
         <hr style="width: 100%; color: black; height: 1px; background-color:black;" />
         <p1 style="float:left">Playlists: {{getPlaylistCount()}}</p1>
         <br><br>
