@@ -34,6 +34,9 @@ angular.module('iprogApp')
       //var ref = new Firebase('https://dazzling-heat-875.firebaseio.com/playlists');
       var refU = new Firebase('https://dazzling-heat-875.firebaseio.com/users');
 
+      $scope.createNewPlaylist = function(name){
+          $scope.populatePlaylist();
+      };
 
       $scope.populatePlaylist = function(){
           var userRef = refU.child(UserService.authData.uid);
