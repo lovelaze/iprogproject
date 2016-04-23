@@ -16,6 +16,9 @@ angular.module('iprogApp')
     var refusers = new Firebase('https://dazzling-heat-875.firebaseio.com/users');
     UserService.authData = firebasefactory.$getAuth();
 
+    $scope.playlistIds = [];
+    $scope.allPlaylists = [];
+
     $scope.addPlaylistToFirebase = function() {
       //maybe use firebase array for this shit
       var listname = $scope.newPlaylist;
@@ -35,13 +38,57 @@ angular.module('iprogApp')
       var plUserRef = userRef.child('playlists');
       plUserRef.child(pushid).set(listname);
 
-
-      console.log("Added playlist:", listname);
-      console.log($scope.listObjects);
     };
+
+    $scope.getplaylistIds = function(){
+      var userRef = refusers.child(UserService.authData.uid);
+      var plUserRef = userRef.child('playlists');
+      plUserRef.once("value", function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+          var listid = {'id':childSnapshot.key(), 'name':childSnapshot.val()};
+          $scope.playlistIds.push(listid);
+        });
+      });
+    };
+    $scope.getplaylistIds();
+
+    $scope.getPlaylistSongs = function (id) {
+      var songlist = [];
+      var songs = ref.child(id).child("songs");
+      songs.once("value", function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+          var song = childSnapshot.key();
+          songlist.push(song);
+          console.log(song);
+        });
+      });
+      return songlist;
+    }
+    $scope.getPlaylistSongs("-KG2rIEG0tNmnlL_An5z");
+    /*
+    // run more than once
+    $scope.populatePlaylists = function(){
+      //update ids for all playlists of the logged in user
+      $scope.getplaylistIds();
+
+      for(idinstance in $scope.playlistIds){
+        var songs = ref.child(idinstance.id).child("songs");
+        songs.once("value", function(snapshot) {
+          snapshot.forEach(function(childSnapshot) {
+            var tuple = {'songid':childSnapshot.key(), 'name':childSnapshot.val()};
+            $scope.allPlaylists.push(tuple);
+          });
+        });
+      }
+    };
+    $scope.populatePlaylists();*/
 
     //test method for adding firebase data to scope variable
     $scope.getPlaylist = function() {
+      var lists = ref.child("playlists");
+      //$scope.allPlaylists = lists.val();
+      //console.log(lists);
+      /*
       ref.once("value", function(snapshot){
         //each playlist
         snapshot.forEach(function(childSnapshot){
@@ -50,8 +97,9 @@ angular.module('iprogApp')
           //var userN = childdata.user;
           console.log(childdata);
         });
-      });
+      });*/
     };
+    //$scope.getPlaylist();
 
     $scope.getUsername = function() {
         return UserService.authData;
