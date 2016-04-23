@@ -61,9 +61,7 @@ angular.module('iprogApp')
         },
 
         createSongIframeFromId: function(id){
-          console.log();
           var iframe = 'https://w.soundcloud.com/player/?visual=false&url=https://api.soundcloud.com/tracks/' + id + '&show_artwork=true&auto_play=false';
-          console.log(iframe);
           return $sce.trustAsResourceUrl(iframe);
         },
 

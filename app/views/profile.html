@@ -14,7 +14,7 @@
     </div>
 
     <!-- the main content -->
-    <div id="profinfo">
+    <div ng-show="showValueOne" class="ng-hide">
         <h2 align="left" style="font-weight: bold;">{{getUsername().password.email}}</h2>
         <hr style="width: 100%; color: black; height: 1px; background-color:black;" />
         <p1 style="float:left; font-size: 18px">Playlists: {{getPlaylistCount()}}</p1>
@@ -22,7 +22,7 @@
         <p2 style="float:left; font-size: 18px">Total songs: {{getSongsCount()}}</p2>
         <br>
     </div>
-    <div id="friends" style="display:none;">
+    <div ng-show="showValueTwo" class="ng-hide">
         <h3 align="left">DJ Khalid</h3></a>
         <p1 style="float:left">Playlists</p1>
         <br>
@@ -35,60 +35,18 @@
         <p1 style="float:left">Playlists</p1>
         <br>
     </div>
-    <div id="playlists" style="display:none;">
+    <div ng-show="showValueThree" class="ng-hide">
         <div class="input-group">
             <input ng-model="newPlaylist" type="text" class="form-control" placeholder="Playlist name">
             <span class="input-group-btn">
                 <button ng-click="addPlaylistToFirebase()" type="submit" class="btn-sm btn-default">Add playlist</button>
             </span>
         </div>
-        <hr>
-        <button type="submit" class="btn-sm btn-default" style="float:right">Share</button>
-        <div col-xs-3 text-left data-toggle="collapse" data-target="#demo">
-            <h2 align="left" style="font-weight:bold; width:400px;">Nalle Puh soundtracks</h2>
+        <div class="col-lg-12">
+            <h2 align="left" style="font-weight: bold;">Your playlists:</h2>
         </div>
-        <div id="demo" class="collapse">
-            <div ng-click="testShowIframes('song1')">
-                <p align="left">1. Hello (Adele) Spanglish Cover by Karen Rodriguez</p>
-            </div>
-            <div id="song1" class="col-lg-12" style="display:none;">
-                <iframe width="100%"  scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?visual=false&amp;url=https://api.soundcloud.com/tracks/235399996&amp;show_artwork=true&amp;auto_play=false"></iframe>
-            </div>
-            <div ng-click="testShowIframes('song2')">
-                <p align="left">2. Linkin Park - Final Masquerade (Aviators Remix)</p>
-            </div>
-            <div id="song2" class="col-lg-12" style="display:none;">
-                <iframe width="100%"  scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?visual=false&amp;url=https://api.soundcloud.com/tracks/170703457&amp;show_artwork=true&amp;auto_play=false"></iframe>
-            </div>
-        </div>
-        <hr style="width: 100%; color: grey; height: 1px; background-color:grey;" />
-        <button type="submit" class="btn-sm btn-default" style="float:right">Share</button>
-        <div data-toggle="collapse" data-target="#demo2">
-            <h2 align="left" style="font-weight: bold;">Only Linkin Park!</h2>
-        </div>
-        <div id="demo2" class="collapse">
-            <div ng-click="testShowIframes('song3')">
-                <p align="left">1. Linkin Park - Final Masquerade (Aviators Remix)</p>
-            </div>
-            <div id="song3" class="col-lg-12" style="display:none;">
-                <iframe width="100%"  scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?visual=false&amp;url=https://api.soundcloud.com/tracks/170703457&amp;show_artwork=true&amp;auto_play=false"></iframe>
-            </div>
-            <div ng-click="testShowIframes('song4')">
-                <p align="left">2. Linkin Park - What I've Done (Alexis K Dubstep Remix)</p>
-            </div>
-            <div id="song4" class="col-lg-12" style="display:none;">
-                <iframe width="100%"  scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?visual=false&amp;url=https://api.soundcloud.com/tracks/4339627&amp;show_artwork=true&amp;auto_play=false"></iframe>
-            </div>
-        </div>
-        <hr style="width: 100%; color: grey; height: 1px; background-color:grey;" />
-        <!--<div data-toggle="collapse" data-target="#demo3">
-            <h2>Free Stone Music</h2>
-        </div>
-        <div id="demo3" class="collapse">
-            Songs for playlist three
-            Spelbara låtar bör komma upp här som det blir när ni söker efter låtar!
-        </div>
-        <br>-->
+        <hr style="width: 100%; color: black; height: 1px; background-color:black;" />
+        <!--SHARE BUTTOM OM MAN VILL HA DET<button type="submit" class="btn-sm btn-default" style="float:right">Share</button>-->
         <uib-accordion >
             <div class="row" ng-repeat="list in playlistIds">
               <uib-accordion-group is-open="accordionOpen">

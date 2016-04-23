@@ -19,18 +19,9 @@ angular.module('iprogApp')
     $scope.allPlaylists = [];
     $scope.allPlaylists2 = [];
 
-    $scope.info1list = [];
-    $scope.info2list = [];
-    /*var info = {'id':"260510896", 'name':"dance"};
-    var info1second = {'id':"260510896", 'name':"danceversion2"};
-    var info2 = {'id':"260510896", 'name':"dance"};
-    $scope.info1list.push(info);
-    $scope.info1list.push(info1second);
-    var intodfdf = $scope.info1list;
-    $scope.info2list.push(info2);
-    var intodfdf2 = $scope.info2list;
-    $scope.allPlaylists2.push(intodfdf);
-    $scope.allPlaylists2.push(intodfdf2);*/
+    $scope.showValueOne = true;
+    $scope.showValueTwo = false;
+    $scope.showValueThree = false;
 
     //called when addplaylist button is pressed
     $scope.addPlaylistToFirebase = function() {
@@ -42,7 +33,6 @@ angular.module('iprogApp')
         name: listname,
         user: username
       });
-      console.log(id.key());
       var pushid = id.key();
 
       //add to firebase->users
@@ -60,12 +50,11 @@ angular.module('iprogApp')
         snapshot.forEach(function(childSnapshot) {
           var list_id = {'id':childSnapshot.key(), 'name':childSnapshot.val()};
           $scope.playlistIds.push(list_id);
-          var string = childSnapshot.key();
-          console.log(string);
         });
       });
     };
 
+    //stores every song into allPlaylists together with the id of its list
     $scope.getPlaylistSongs = function () {
       $scope.allPlaylists = [];
       $scope.getplaylistIds();
@@ -80,7 +69,6 @@ angular.module('iprogApp')
               child2Snapshot.forEach(function(child3Snapshot){
                 // child3Snapshot -> song level (e.g. key=260510896: val=Land Of Thieves Demo)
                 var song = {'id':child3Snapshot.key(), 'name':child3Snapshot.val(), 'listid': listid};
-                console.log(child3Snapshot.key() + " " + child3Snapshot.val() + " " + listid);
                 $scope.allPlaylists.push(song);
               });
             }
@@ -88,6 +76,9 @@ angular.module('iprogApp')
         });
       });
     };
+    //------------------------ CALL THIS METHOD BELOW SOMEWHERE SO THAT IS HAPPEN MORE THAN ONCE ---------------------
+    // ALSO PLAYLISTS AND MYINFO information DOES NOT SHOW UP UNTIL YOU PRESS A HEADER AT LEAST ONE TIME, NEEDS FIXING
+    //----------------------------------------------------------------------------------------------------------------
     $scope.getPlaylistSongs();
 
     $scope.getUsername = function() {
@@ -129,42 +120,21 @@ angular.module('iprogApp')
       }
     };
 
+    //setting scope bool variables that decides if divs are showing or not, depending on which "header" you click
     $scope.showContent = function(function_nr) {
-		document.getElementById('profinfo').style.display = "none";
-		document.getElementById('friends').style.display = "none";
-		document.getElementById('playlists').style.display = "none";
-		switch (function_nr) {
-		    case 0:
-		        document.getElementById('profinfo').style.display = "block";
-		        break;
-		    case 1:
-		        document.getElementById('friends').style.display = "block";
-		        break;
-		    case 2:
-		        document.getElementById('playlists').style.display = "block";
-		        break;
-		}
-	};
-
-	$scope.addPlaylist = function(){
-		var listname = $scope.newPlaylist;
-		//add playlist name (empty) to firebase
-		var div = '<div><h2 align="left" style="font-weight: bold;">' + listname + '</h2></div><hr style="width: 100%; color: grey; height: 1px; background-color:grey;" />';
-		angular.element(document.querySelector('#playlists')).append(div);
-	};
-
-	$scope.testShowIframes = function(songnr){
-		var bool = true;
-		if(document.getElementById(songnr).style.display === "block"){
-			bool = false;
-		}
-		document.getElementById('song1').style.display = "none";
-		document.getElementById('song2').style.display = "none";
-		document.getElementById('song3').style.display = "none";
-		document.getElementById('song4').style.display = "none";
-
-		if(bool){
-			document.getElementById(songnr).style.display = "block";
-		}
+      $scope.showValueOne = false;
+      $scope.showValueTwo = false;
+      $scope.showValueThree = false;
+  		switch (function_nr) {
+  		    case 0:
+  		      $scope.showValueOne = true;
+  		      break;
+  		    case 1:
+  		      $scope.showValueTwo = true;
+  		      break;
+  		    case 2:
+  		      $scope.showValueThree = true;
+  		      break;
+  		}
 	};
 });
