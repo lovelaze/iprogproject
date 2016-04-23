@@ -13,6 +13,7 @@ angular.module('iprogApp')
   .controller('ProfileCtrl', function ($scope, UserService) {
 
     var ref = new Firebase('https://dazzling-heat-875.firebaseio.com/playlists');
+    var refusers = new Firebase('https://dazzling-heat-875.firebaseio.com/users');
 
     $scope.addPlaylistToFirebase = function() {
       //maybe use firebase array for this shit
@@ -21,19 +22,25 @@ angular.module('iprogApp')
       console.log(UserService.authData.password.email);
       var username = UserService.authData.password.email;
       //pushing to add specific if to each playlist
-      ref.push({
+      var id = ref.push({
         name: listname,
         user: username,
         songs: {song: "https://w.soundcloud.com/player/?visual=false&url=https://api.soundcloud.com/tracks/53437625&show_artwork=true&auto_play=false"}
       });
+      console.log(id.key());
+      var pushid = id.key();
 
-      //test method for adding firebase data to scope variable
-      $scope.getPlaylist();
+      //add to firebase->users
+      var userRef = refusers.child(UserService.authData.uid);
+      var plUserRef = userRef.child('playlists');
+      plUserRef.push(pushid);
+
 
       console.log("Added playlist:", listname);
       console.log($scope.listObjects);
     };
 
+    //test method for adding firebase data to scope variable
     $scope.getPlaylist = function() {
       ref.once("value", function(snapshot){
         //each playlist
