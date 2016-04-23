@@ -10,11 +10,10 @@
  * Controller of the iprogApp
  */
 angular.module('iprogApp')
-  .controller('ProfileCtrl', function ($scope, UserService, firebasefactory) {
+  .controller('ProfileCtrl', function ($scope, UserService, soundcloudfactory, firebasefactory) {
 
     var ref = new Firebase('https://dazzling-heat-875.firebaseio.com/playlists');
     var refusers = new Firebase('https://dazzling-heat-875.firebaseio.com/users');
-    UserService.authData = firebasefactory.$getAuth();
 
     $scope.playlistIds = [];
     $scope.allPlaylists = [];
@@ -53,18 +52,17 @@ angular.module('iprogApp')
     $scope.getplaylistIds();
 
     $scope.getPlaylistSongs = function (id) {
-      var songlist = [];
-      var songs = ref.child(id).child("songs");
-      songs.once("value", function(snapshot) {
-        snapshot.forEach(function(childSnapshot) {
-          var song = childSnapshot.key();
-          songlist.push(song);
-          console.log(song);
+        var songs = ref.child(id).child("songs");
+        songs.once("value", function(snapshot) {
+          snapshot.forEach(function(childSnapshot) {
+            var song = {'id':childSnapshot.key(), 'name':childSnapshot.val()};
+            $scope.allPlaylists.push(song);
+            console.log(song);
+          });
         });
-      });
-      return songlist;
-    }
-    $scope.getPlaylistSongs("-KG2rIEG0tNmnlL_An5z");
+    };
+    $scope.getPlaylistSongs("260510896");
+
     /*
     // run more than once
     $scope.populatePlaylists = function(){
@@ -115,6 +113,10 @@ angular.module('iprogApp')
         } else {
             return NaN;
         }
+    };
+
+    $scope.getframe = function(id) {
+        return soundcloudfactory.createSongIframeFromId(id);
     };
 
     $scope.getSongsCount = function() {

@@ -92,8 +92,9 @@
         <div class="row" ng-repeat="list in playlistIds">
           <div class="col-lg-12">
             <h2 align="left" style="font-weight: bold;">{{list.name}}</h2>
-            <div ng-repeat="song in getPlaylistSongs(list.id)">
+            <div ng-repeat="song in allPlaylists">
               <p align="left">{{song.name}}</p>
+              <iframe width="100%"  scrolling="no" frameborder="no" ng-src="{{getframe(song.id)}}"></iframe>
             </div>
             <hr style="width: 100%; color: grey; height: 1px; background-color:grey;" />
           </div>
