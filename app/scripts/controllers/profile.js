@@ -33,7 +33,7 @@ angular.module('iprogApp')
       //add to firebase->users
       var userRef = refusers.child(UserService.authData.uid);
       var plUserRef = userRef.child('playlists');
-      plUserRef.push(pushid);
+      plUserRef.child(pushid).set(listname);
 
 
       console.log("Added playlist:", listname);
