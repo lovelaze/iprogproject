@@ -68,7 +68,7 @@ angular.module('iprogApp')
       ref.on("value", function(snapshot) {
         snapshot.forEach(function(childSnapshot) {
           childSnapshot.forEach(function(childChildSnapshot) {
-            childChildSnapshot.forEach(function(songSnapshot) {
+            childChildSnapshot.forEach(function() {
               // console.log("SONGSNAPSHOT VALUE: ", songSnapshot.val());
               num += 1;
             });

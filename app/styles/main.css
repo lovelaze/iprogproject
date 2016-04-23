@@ -133,3 +133,7 @@ body {
     border-bottom: 0;
   }
 }
+
+.reset-this {
+  padding: 5px !important;
+}

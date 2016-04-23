@@ -26,10 +26,16 @@ angular.module('iprogApp')
       $scope.maxSize = 5;
       $scope.songsPerPage = 5;
 
+      $scope.mstep = 1;
+      $scope.sstep = 1;
+
+      $scope.playlists = ['bajs', 'fisk', 'k-nulla b-rudar'];
+
       var ref = new Firebase('https://dazzling-heat-875.firebaseio.com/playlists');
 
-      $scope.addSongToPlaylist = function(url) {
+      $scope.addSongToPlaylist = function(url, item) {
           var playlistRef = ref.child("playlist1");
+          console.log("url:" + url + ", item: " + item);
           // var newPlaylistRef = playlistRef.push();
 
           // Convert track uri to an iframe link for that track
@@ -80,7 +86,7 @@ angular.module('iprogApp')
 
               $scope.totalItems = $scope.downloadables.length;
 
-              if ($scope.downloadables.length == 0) {
+              if ($scope.downloadables.length === 0) {
                   $scope.pageList = [];
               } else {
                   updatePage(1);
