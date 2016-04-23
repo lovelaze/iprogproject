@@ -17,12 +17,25 @@ angular.module('iprogApp')
 
     $scope.playlistIds = [];
     $scope.allPlaylists = [];
+    $scope.allPlaylists2 = [];
 
+    $scope.info1list = [];
+    $scope.info2list = [];
+    /*var info = {'id':"260510896", 'name':"dance"};
+    var info1second = {'id':"260510896", 'name':"danceversion2"};
+    var info2 = {'id':"260510896", 'name':"dance"};
+    $scope.info1list.push(info);
+    $scope.info1list.push(info1second);
+    var intodfdf = $scope.info1list;
+    $scope.info2list.push(info2);
+    var intodfdf2 = $scope.info2list;
+    $scope.allPlaylists2.push(intodfdf);
+    $scope.allPlaylists2.push(intodfdf2);*/
+
+    //called when addplaylist button is pressed
     $scope.addPlaylistToFirebase = function() {
       //maybe use firebase array for this shit
       var listname = $scope.newPlaylist;
-
-      console.log(UserService.authData.password.email);
       var username = UserService.authData.password.email;
       //pushing to add specific if to each playlist
       var id = ref.push({
@@ -36,68 +49,46 @@ angular.module('iprogApp')
       var userRef = refusers.child(UserService.authData.uid);
       var plUserRef = userRef.child('playlists');
       plUserRef.child(pushid).set(listname);
-
     };
 
+    //get all the ids and name of the playlists of the logged in user (from firebase->users)
     $scope.getplaylistIds = function(){
+      $scope.playlistIds = [];
       var userRef = refusers.child(UserService.authData.uid);
       var plUserRef = userRef.child('playlists');
       plUserRef.once("value", function(snapshot) {
         snapshot.forEach(function(childSnapshot) {
-          var listid = {'id':childSnapshot.key(), 'name':childSnapshot.val()};
-          $scope.playlistIds.push(listid);
+          var list_id = {'id':childSnapshot.key(), 'name':childSnapshot.val()};
+          $scope.playlistIds.push(list_id);
+          var string = childSnapshot.key();
+          console.log(string);
         });
       });
     };
-    $scope.getplaylistIds();
 
-    $scope.getPlaylistSongs = function (id) {
-        var songs = ref.child(id).child("songs");
-        songs.once("value", function(snapshot) {
-          snapshot.forEach(function(childSnapshot) {
-            var song = {'id':childSnapshot.key(), 'name':childSnapshot.val()};
-            $scope.allPlaylists.push(song);
-            console.log(song);
-          });
-        });
-    };
-    $scope.getPlaylistSongs("260510896");
-
-    /*
-    // run more than once
-    $scope.populatePlaylists = function(){
-      //update ids for all playlists of the logged in user
+    $scope.getPlaylistSongs = function () {
+      $scope.allPlaylists = [];
       $scope.getplaylistIds();
-
-      for(idinstance in $scope.playlistIds){
-        var songs = ref.child(idinstance.id).child("songs");
-        songs.once("value", function(snapshot) {
-          snapshot.forEach(function(childSnapshot) {
-            var tuple = {'songid':childSnapshot.key(), 'name':childSnapshot.val()};
-            $scope.allPlaylists.push(tuple);
+      var listid;
+      ref.once("value", function(snapshot) {
+        snapshot.forEach(function(childSnapshot){
+          // childSnapshot -> playlist id level (e.g. -KG2rIEG0tNmnlL_An5z)
+          listid = childSnapshot.key();
+          childSnapshot.forEach(function(child2Snapshot){
+            // child2Snapshot -> playlist field level (name, songs, user)
+            if(child2Snapshot.key() == "songs"){
+              child2Snapshot.forEach(function(child3Snapshot){
+                // child3Snapshot -> song level (e.g. key=260510896: val=Land Of Thieves Demo)
+                var song = {'id':child3Snapshot.key(), 'name':child3Snapshot.val(), 'listid': listid};
+                console.log(child3Snapshot.key() + " " + child3Snapshot.val() + " " + listid);
+                $scope.allPlaylists.push(song);
+              });
+            }
           });
         });
-      }
+      });
     };
-    $scope.populatePlaylists();*/
-
-    //test method for adding firebase data to scope variable
-    $scope.getPlaylist = function() {
-      var lists = ref.child("playlists");
-      //$scope.allPlaylists = lists.val();
-      //console.log(lists);
-      /*
-      ref.once("value", function(snapshot){
-        //each playlist
-        snapshot.forEach(function(childSnapshot){
-          //get data inside each playlist
-          var childdata = childSnapshot.val();
-          //var userN = childdata.user;
-          console.log(childdata);
-        });
-      });*/
-    };
-    //$scope.getPlaylist();
+    $scope.getPlaylistSongs();
 
     $scope.getUsername = function() {
         return UserService.authData;
@@ -176,4 +167,4 @@ angular.module('iprogApp')
 			document.getElementById(songnr).style.display = "block";
 		}
 	};
-  });
+});

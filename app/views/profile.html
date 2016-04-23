@@ -89,16 +89,22 @@
             Spelbara låtar bör komma upp här som det blir när ni söker efter låtar!
         </div>
         <br>-->
-        <div class="row" ng-repeat="list in playlistIds">
-          <div class="col-lg-12">
-            <h2 align="left" style="font-weight: bold;">{{list.name}}</h2>
-            <div ng-repeat="song in allPlaylists">
-              <p align="left">{{song.name}}</p>
-              <iframe width="100%"  scrolling="no" frameborder="no" ng-src="{{getframe(song.id)}}"></iframe>
+        <uib-accordion >
+            <div class="row" ng-repeat="list in playlistIds">
+              <uib-accordion-group is-open="accordionOpen">
+                <div class="col-lg-12">
+                  <uib-accordion-heading >
+                    <!--<h2 align="left" style="font-weight: bold;">{{list.name}}</h2>-->
+                    <center>{{list.name}}<i class="glyphicon" ng-class="{'glyphicon-chevron-down': accordionOpen, 'glyphicon-chevron-right': !accordionOpen}"></i></center>
+                  </uib-accordion-heading>
+                  <div ng-repeat="song in allPlaylists" ng-if="list.id == song.listid">
+                    <p align="left">{{song.name}}</p>
+                    <iframe width="100%"  scrolling="no" frameborder="no" ng-src="{{getframe(song.id)}}"></iframe>
+                  </div>
+                </div>
+              </uib-accordion-group>
             </div>
-            <hr style="width: 100%; color: grey; height: 1px; background-color:grey;" />
-          </div>
-        </div>
+        </uib-accordion>
     </div>
 
 </div>
