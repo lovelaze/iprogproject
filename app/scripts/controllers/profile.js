@@ -51,6 +51,37 @@ angular.module('iprogApp')
       });
     };
 
+    $scope.getPlaylistCount = function() {
+      var num = 0;
+      ref.on("value", function(snapshot) {
+        num = snapshot.numChildren();
+      });
+      if (num > 0) {
+        return num;
+      } else {
+        return NaN;
+      }
+    };
+
+    $scope.getSongsCount = function() {
+      var num = 0;
+      ref.on("value", function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+          childSnapshot.forEach(function(childChildSnapshot) {
+            childChildSnapshot.forEach(function(songSnapshot) {
+              // console.log("SONGSNAPSHOT VALUE: ", songSnapshot.val());
+              num += 1;
+            });
+          });
+        });
+      });
+      if (num > 0) {
+        return num;
+      } else {
+        return NaN;
+      }
+    };
+
     $scope.showContent = function(function_nr) {
 		document.getElementById('profinfo').style.display = "none";
 		document.getElementById('friends').style.display = "none";
