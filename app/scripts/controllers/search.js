@@ -31,13 +31,14 @@ angular.module('iprogApp')
 
       $scope.playlists = [];
 
-      //var ref = new Firebase('https://dazzling-heat-875.firebaseio.com/playlists');
+      var refP = new Firebase('https://dazzling-heat-875.firebaseio.com/playlists');
       var refU = new Firebase('https://dazzling-heat-875.firebaseio.com/users');
 
       $scope.createNewPlaylist = function(name){
           $scope.populatePlaylist();
       };
 
+      // run more than once
       $scope.populatePlaylist = function(){
           var userRef = refU.child(UserService.authData.uid);
           var plUserRef = userRef.child('playlists');
@@ -45,8 +46,8 @@ angular.module('iprogApp')
           // The callback function will get called twice, once for "fred" and once for "barney"
           snapshot.forEach(function(childSnapshot) {
             // key will be "fred" the first time and "barney" the second time
-            var key = childSnapshot.key();
-            $scope.playlists.push(key);
+            var tuple = {'id':childSnapshot.key(), 'name':childSnapshot.val()}
+            $scope.playlists.push(tuple);
           });
         });
       };
@@ -54,17 +55,20 @@ angular.module('iprogApp')
       $scope.populatePlaylist();
 
 
-      $scope.addSongToPlaylist = function(url, item) {
+      $scope.addSongToPlaylist = function(song, playlistId) {
           //var playlistRef = ref.child("playlist1");
-          var userRef = refU.child(UserService.authData.uid);
-          var plUserRef = userRef.child('playlists');
-          var listRef = plUserRef.child(item);
-          console.log("pl" + listRef);
-          console.log("url:" + url + ", item: " + item);
+          var listRef = refP.child(playlistId).child('songs');
+          listRef.child(song.id).set(song.title);
+
+
           // var newPlaylistRef = playlistRef.push();
 
           // Convert track uri to an iframe link for that track
-          var track = soundcloudfactory.createSongIframe(url);
+
+
+          //var track = soundcloudfactory.createSongIframe(url);
+
+
           /*
           console.log("fetched track is", track);
           playlistRef.set({
@@ -72,7 +76,7 @@ angular.module('iprogApp')
           });
           */
 
-          listRef.push({'track' : track});
+          //listRef.push({'track' : track});
       };
 
       $scope.createPages = function(){

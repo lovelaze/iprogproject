@@ -83,8 +83,8 @@
                 </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                 <li ng-repeat="item in playlists">
-                    <a ng-click="addSongToPlaylist(song.uri, item)">
-                        {{item}}
+                    <a ng-click="addSongToPlaylist(song, item.id)">
+                        {{item.name}}
                     </a>
                 </li>
                 <li role="separator" class="divider"></li>

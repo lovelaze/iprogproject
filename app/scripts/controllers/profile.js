@@ -24,8 +24,7 @@ angular.module('iprogApp')
       //pushing to add specific if to each playlist
       var id = ref.push({
         name: listname,
-        user: username,
-        songs: {song: "https://w.soundcloud.com/player/?visual=false&url=https://api.soundcloud.com/tracks/53437625&show_artwork=true&auto_play=false"}
+        user: username
       });
       console.log(id.key());
       var pushid = id.key();
