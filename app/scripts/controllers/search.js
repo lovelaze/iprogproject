@@ -8,7 +8,7 @@
  * Controller of the iprogApp
  */
 angular.module('iprogApp')
-  .controller('SearchCtrl', function ($scope, soundcloudfactory, $sce) {
+  .controller('SearchCtrl', function ($scope, soundcloudfactory, $sce, UserService) {
 
       $scope.downloadables = [];
       $scope.pageList = [];
@@ -29,24 +29,47 @@ angular.module('iprogApp')
       $scope.mstep = 1;
       $scope.sstep = 1;
 
-      $scope.playlists = ['bajs', 'fisk', 'k-nulla b-rudar'];
+      $scope.playlists = [];
 
-      var ref = new Firebase('https://dazzling-heat-875.firebaseio.com/playlists');
+      //var ref = new Firebase('https://dazzling-heat-875.firebaseio.com/playlists');
+      var refU = new Firebase('https://dazzling-heat-875.firebaseio.com/users');
+
+
+      $scope.populatePlaylist = function(){
+          var userRef = refU.child(UserService.authData.uid);
+          var plUserRef = userRef.child('playlists');
+          plUserRef.once("value", function(snapshot) {
+          // The callback function will get called twice, once for "fred" and once for "barney"
+          snapshot.forEach(function(childSnapshot) {
+            // key will be "fred" the first time and "barney" the second time
+            var key = childSnapshot.key();
+            $scope.playlists.push(key);
+          });
+        });
+      };
+
+      $scope.populatePlaylist();
+
 
       $scope.addSongToPlaylist = function(url, item) {
-          var playlistRef = ref.child("playlist1");
+          //var playlistRef = ref.child("playlist1");
+          var userRef = refU.child(UserService.authData.uid);
+          var plUserRef = userRef.child('playlists');
+          var listRef = plUserRef.child(item);
+          console.log("pl" + listRef);
           console.log("url:" + url + ", item: " + item);
           // var newPlaylistRef = playlistRef.push();
 
           // Convert track uri to an iframe link for that track
           var track = soundcloudfactory.createSongIframe(url);
-
+          /*
           console.log("fetched track is", track);
           playlistRef.set({
               track1: track,
           });
+          */
 
-          console.log("Adding to song1 in playlist1!");
+          listRef.push({'track' : track});
       };
 
       $scope.createPages = function(){

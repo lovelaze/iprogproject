@@ -11,11 +11,6 @@
  */
 angular.module('iprogApp')
   .controller('ProfileCtrl', function ($scope, UserService) {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
 
     var ref = new Firebase('https://dazzling-heat-875.firebaseio.com/playlists');
 
