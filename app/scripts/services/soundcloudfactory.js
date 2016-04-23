@@ -9,7 +9,7 @@
 * Factory in the iprogApp.
 */
 angular.module('iprogApp')
-.factory('soundcloudfactory', function ($window, $q) {
+.factory('soundcloudfactory', function ($window, $q, $sce) {
 
     //var imageurl = "www.image.com";
     //var cl_id = '927cd813d10aaf8f2040cd5ab3984734';
@@ -58,6 +58,13 @@ angular.module('iprogApp')
         createSongIframe: function(url) {
             var iframe = 'https://w.soundcloud.com/player/?visual=false&url=' + url + '&show_artwork=true&auto_play=false';
             return iframe;
+        },
+
+        createSongIframeFromId: function(id){
+          console.log();
+          var iframe = 'https://w.soundcloud.com/player/?visual=false&url=https://api.soundcloud.com/tracks/' + id + '&show_artwork=true&auto_play=false';
+          console.log(iframe);
+          return $sce.trustAsResourceUrl(iframe);
         },
 
         testPaging: function() {
