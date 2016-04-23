@@ -10,6 +10,8 @@
 angular.module('iprogApp')
   .controller('SearchCtrl', function ($scope, soundcloudfactory, $sce, UserService) {
 
+      $scope.accordionOpen = true;
+
       $scope.downloadables = [];
       $scope.pageList = [];
       $scope.playlists = [];
