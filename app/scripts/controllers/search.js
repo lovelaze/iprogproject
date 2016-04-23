@@ -10,6 +10,8 @@
 angular.module('iprogApp')
   .controller('SearchCtrl', function ($scope, soundcloudfactory, $sce, UserService) {
 
+      $scope.params = {'limit':200}
+
       $scope.accordionOpen = true;
 
       $scope.downloadables = [];
@@ -64,8 +66,8 @@ angular.module('iprogApp')
 
 
       $scope.songQuery = function() {
-          var params = {'term':$scope.searchInput,'genre':$scope.genreInput, 'minbpm':$scope.minbpm, 'maxbpm':$scope.maxbpm, 'limit':200};
-          soundcloudfactory.search(params).then(function(data) {
+          //var params = {'term':$scope.searchInput,'genre':$scope.genreOption, 'minPlay':$scope.minPlayOption, 'maxPlay':$scope.maxPlayOption, 'minbpm':$scope.minBpmOption, 'maxbpm':$scope.maxBpmOption, 'limit':200};
+          soundcloudfactory.search($scope.params).then(function(data) {
               $scope.downloadables = [];
 
               data.forEach(function(track) {
@@ -83,6 +85,7 @@ angular.module('iprogApp')
               }
 
           });
+          console.log($scope.params);
       };
 
       $scope.getframe = function(url) {

@@ -47,7 +47,7 @@ angular.module('iprogApp')
 
             var deferred = $q.defer();
 
-              SC.get('/tracks', {q:params.term, limit:params.limit, genres:params.genre}).then(function(tracks) {
+              SC.get('/tracks', {'q':params.query, 'limit':params.limit, 'genres':params.genre, 'bpm[from]':params.minBpm, 'bpm[to]':params.maxBpm, 'duration[from]':params.minPlay, 'duration[to]':params.maxPlay}).then(function(tracks) {
                   deferred.resolve( tracks);
               });
 
