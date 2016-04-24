@@ -48,18 +48,27 @@
         <hr style="width: 100%; color: black; height: 1px; background-color:black;" />
         <!--SHARE BUTTOM OM MAN VILL HA DET<button type="submit" class="btn-sm btn-default" style="float:right">Share</button>-->
         <uib-accordion >
+            <div class="row vertical-align" ng-repeat="list in playlistIds">
+                <div class="col-lg-11">
+                  <uib-accordion-group  is-open="accordionOpen" ng-click="accordionOnClick(list.id, accordionOpen)">
+                      <uib-accordion-heading >
+                        <!--<h2 align="left" style="font-weight: bold;">{{list.name}}</h2>-->
+                        <!--<div class="glyphicon glyphicon-remove"  align="right"></div>-->
+                        <center>{{list.name}}<i class="glyphicon" ng-class="{'glyphicon-chevron-down': accordionOpen, 'glyphicon-chevron-right': !accordionOpen}"></i></center>
+                      </uib-accordion-heading>
+                      <div ng-repeat="song in currentSongsList" ng-if="currentPlaylist === list.id">
+                        <p align="left">{{song.name}}</p>
+                        <iframe width="100%"  scrolling="no" frameborder="no" ng-src="{{getframe(song.id)}}"></iframe>
+                      </div>
+                  </uib-accordion-group>
+              </div>
+              <div class="col-lg-1">
 
-              <uib-accordion-group ng-repeat="list in playlistIds" is-open="accordionOpen" ng-click="accordionOnClick(list.id, accordionOpen)">
-                  <uib-accordion-heading >
-                    <!--<h2 align="left" style="font-weight: bold;">{{list.name}}</h2>-->
-                    <div class="glyphicon glyphicon-remove" ng-click="removePlaylist(list.id)" align="right"></div>
-                    <center>{{list.name}}<i class="glyphicon" ng-class="{'glyphicon-chevron-down': accordionOpen, 'glyphicon-chevron-right': !accordionOpen}"></i></center>
-                  </uib-accordion-heading>
-                  <div ng-repeat="song in currentSongsList">
-                    <p align="left">{{song.name}}</p>
-                    <iframe width="100%"  scrolling="no" frameborder="no" ng-src="{{getframe(song.id)}}"></iframe>
-                  </div>
-              </uib-accordion-group>
+                <button ng-click="removePlaylist(list.id, $index)" type="button" class="btn btn-xs btn-danger">
+                    <span class="glyphicon glyphicon-trash"></span>&nbsp;
+                </button>
+              </div>
+          </div>
 
         </uib-accordion>
     </div>

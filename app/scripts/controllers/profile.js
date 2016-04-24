@@ -179,14 +179,17 @@ angular.module('iprogApp')
 	};
 
   //removes playlist, from both "users" and "playlists" in firebase
-  $scope.removePlaylist = function(id){
+  $scope.removePlaylist = function(id, index){
     //remove from firebase->users
     refusers.child(UserService.authData.uid).child("playlists").child(id).remove();
-
     //remove from firebase->playlists
     ref.child(id).remove();
 
-    //$scope.getPlaylistSongs();
+
+    if (index > -1) {
+        $scope.playlistIds.splice(index, 1);
+    }
+
   };
 
   init();

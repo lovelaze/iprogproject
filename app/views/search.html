@@ -84,7 +84,7 @@
             <uib-pagination ng-show="pageList.length != 0" ng-change="pageChange()" total-items="totalItems" ng-model="currentPage" max-size="maxSize" items-per-page="itemsPerPage" class="pagination-sm" boundary-link-numbers="true"></uib-pagination>
         </div>
     </div>
-    <div class="row song" ng-repeat="song in pageList">
+    <div class="row song vertical-align" ng-repeat="song in pageList">
         <div class="col-lg-11">
             <iframe width="100%"  scrolling="no" frameborder="no" ng-src="{{trustSrc(getframe(song.uri))}}"></iframe>
         </div>
