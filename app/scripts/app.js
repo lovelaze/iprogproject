@@ -36,8 +36,8 @@ angular
         controller: 'SearchCtrl',
         controllerAs: 'search',
         resolve: {
-        "currentAuth": ["firebasefactory", function(firebasefactory) {
-          return firebasefactory.$requireAuth();
+        "currentAuth": ["firebaseauthfactory", function(firebaseauthfactory) {
+          return firebaseauthfactory.$requireAuth();
         }]
         }
       })
@@ -46,8 +46,8 @@ angular
         controller: 'ProfileCtrl',
         controllerAs: 'profile',
         resolve: {
-        "currentAuth": ["firebasefactory", function(firebasefactory) {
-          return firebasefactory.$requireAuth();
+        "currentAuth": ["firebaseauthfactory", function(firebaseauthfactory) {
+          return firebaseauthfactory.$requireAuth();
         }]
         }
     })/*

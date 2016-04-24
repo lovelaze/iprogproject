@@ -8,9 +8,10 @@
  * Controller of the iprogApp
  */
 angular.module('iprogApp')
-  .controller('HeaderCtrl', function ($scope, $location, UserService, firebasefactory) {
+  .controller('HeaderCtrl', function ($scope, $location, UserService, firebaseauthfactory) {
 
-      UserService.authData = firebasefactory.$getAuth();
+      UserService.authData = firebaseauthfactory.$getAuth();
+
       $scope.getAuthData = function() {
           return UserService.authData;
       };
@@ -26,7 +27,7 @@ angular.module('iprogApp')
       };
 
       $scope.logout = function() {
-          firebasefactory.$unauth();
+          firebaseauthfactory.$unauth();
           UserService.loggedIn = false;
           $location.path("/home");
       };
