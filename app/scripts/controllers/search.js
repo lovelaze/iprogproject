@@ -11,7 +11,7 @@ angular.module('iprogApp')
   .controller('SearchCtrl', function ($scope, soundcloudfactory, $sce, UserService, firebasedataservice) {
 
       $scope.params = {'limit':200};
-      $scope.accordionOpen = true;
+      $scope.accordionOpen = false;
 
       $scope.getPageList = function() {
           return UserService.pageList;

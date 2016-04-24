@@ -34,13 +34,13 @@
                   <div class="row" style="padding-top: 15px">
                       <div class="col-lg-6">
                               <div class="input-group input-group-sm">
-                                  <input ng-model="params.minPlay" type="text" class="form-control" placeholder="milliseconds">
+                                  <input ng-model="params.minPlay" type="number" min="0" class="form-control" placeholder="milliseconds">
                                   <span style="width:45%" class="input-group-addon">Min duration</span>
                               </div>
                       </div>
                       <div class="col-lg-6">
                               <div class="input-group input-group-sm">
-                                  <input ng-model="params.maxPlay" type="text" class="form-control" placeholder="milliseconds">
+                                  <input ng-model="params.maxPlay" type="number" min="0" class="form-control" placeholder="milliseconds">
                                   <span style="width:45%" class="input-group-addon">Max duration</span>
                               </div>
                       </div>
@@ -49,13 +49,13 @@
                     <div class="row" style="padding-top: 15px">
                         <div class="col-lg-6">
                             <div class="input-group input-group-sm">
-                                <input ng-model="params.minBpm" type="text" class="form-control" placeholder="eg. 87">
+                                <input ng-model="params.minBpm" type="number" min="0" class="form-control" placeholder="eg. 87">
                                 <span style="width:45%" class="input-group-addon">Min BPM</span>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="input-group input-group-sm">
-                                <input ng-model="params.maxBpm" type="text" class="form-control" placeholder="eg. 87">
+                                <input ng-model="params.maxBpm" type="number" min="0" class="form-control" placeholder="eg. 87">
                                 <span style="width:45%" class="input-group-addon">Max BPM</span>
                             </div>
                         </div>
