@@ -53,8 +53,8 @@
                       <uib-accordion-heading >
                         <center>{{list.name}} <span ng-if="accordionOpen && getCurrentSongsList().length > 0">- {{getCurrentSongsList().length}} songs</span> <i class="glyphicon" ng-class="{'glyphicon-chevron-down': accordionOpen, 'glyphicon-chevron-right': !accordionOpen}"></i></center>
                       </uib-accordion-heading>
-                      <div class="row vertical-align" ng-repeat="song in getCurrentSongsList()" ng-if="currentPlaylist === list.id">
-                          <div class="col-lg-11">
+                      <div style="margin-right:0px" class="row vertical-align" ng-repeat="song in getCurrentSongsList()" ng-if="currentPlaylist === list.id">
+                          <div class="col-lg-11" style="padding-right:0px;">
                             <p align="left">{{song.name}}</p>
                             <iframe width="100%"  scrolling="no" frameborder="no" ng-src="{{getframe(song.id)}}"></iframe>
                         </div>
@@ -68,7 +68,7 @@
               </div>
               <div class="col-lg-1">
 
-                <button ng-click="removePlaylist(list.id, $index)" type="button" class="btn btn-xs btn-danger">
+                <button type=""ng-click="removePlaylist(list.id, $index)" type="button" class="btn btn-xs btn-danger">
                     <span class="glyphicon glyphicon-trash"></span>&nbsp;
                 </button>
               </div>
