@@ -1,5 +1,3 @@
-// jscs:disable requireCamelCaseOrUpperCaseIdentifiers
-
 'use strict';
 
 /**
@@ -19,11 +17,11 @@ angular.module('iprogApp')
           userRef.child(authData.uid).set({
             name: email
           });
-      };
+      }
 
       this.addSongToPlaylist = function(songId, songTitle, playlistId) {
           playlistRef.child(playlistId).child('songs').child(songId).set(songTitle);
-      };
+      }
 
       this.addPlaylist = function(listname, email) {
           var id = playlistRef.push({
@@ -36,14 +34,14 @@ angular.module('iprogApp')
           plUserRef.child(pushid).set(listname);
 
           UserService.playlistIds.push({'id':pushid, 'name':listname});
-      };
+      }
 
       this.removeSong = function(listId, songId, songIndex) {
           playlistRef.child(listId).child('songs').child(songId).remove();
           if (songIndex > -1) {
               UserService.currentSongsList.splice(songIndex, 1);
           }
-      };
+      }
 
       this.getPlaylistIds = function() {
           var tmplist = [];
@@ -59,7 +57,7 @@ angular.module('iprogApp')
           });
 
           return deferred.promise;
-      };
+      }
 
       this.removePlaylist = function(id, index) {
           userRef.child(UserService.authData.uid).child("playlists").child(id).remove();
@@ -69,7 +67,7 @@ angular.module('iprogApp')
           if (index > -1) {
               UserService.playlistIds.splice(index, 1);
           }
-      };
+      }
 
 
       this.getSongs = function(id) {
@@ -81,7 +79,7 @@ angular.module('iprogApp')
                   UserService.currentSongsList.push(song);
               });
           });
-      };
+      }
 
 
 
@@ -94,7 +92,7 @@ angular.module('iprogApp')
             UserService.playlists.push(tuple);
           });
         });
-    };
+      }
 
 
 
