@@ -46,10 +46,10 @@ angular.module('iprogApp')
           email: text
         }).then(function() {
           console.log("Password reset email sent successfully!");
-          $window.alert(console.log("Password reset email sent successfully to ", text));
+          $window.alert("Password reset email sent successfully to " + text);
         }).catch(function(error) {
           console.error("Error: ", error);
-          $window.alert("Error: ", error);
+          $window.alert(error);
         });
     };
 
