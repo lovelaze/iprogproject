@@ -70,7 +70,7 @@
     </div>
 </div>
 
-<div class="jumbotron" ng-show="!pageList.length > 0">
+<div class="jumbotron" ng-show="!getPageList().length > 0">
     <div class="row">
         <div class="col-lg12" style="text-align:center">
             <p> No search results!</p>
@@ -78,15 +78,15 @@
     </div>
 </div>
 
-<div class="jumbotron" ng-show="pageList.length != 0">
+<div class="jumbotron" ng-show="getPageList().length != 0">
     <div class="row searchPagination">
         <div class="col-lg12">
-            <uib-pagination ng-show="pageList.length != 0" ng-change="pageChange()" total-items="totalItems" ng-model="currentPage" max-size="maxSize" items-per-page="itemsPerPage" class="pagination-sm" boundary-link-numbers="true"></uib-pagination>
+            <uib-pagination ng-show="getPageList().length != 0" ng-change="pageChange()" total-items="totalItems" ng-model="currentPage" max-size="maxSize" items-per-page="itemsPerPage" class="pagination-sm" boundary-link-numbers="true"></uib-pagination>
         </div>
     </div>
-    <div class="row song vertical-align" ng-repeat="song in pageList">
+    <div class="row song vertical-align" ng-repeat="song in getPageList()">
         <div class="col-lg-11">
-            <iframe width="100%"  scrolling="no" frameborder="no" ng-src="{{trustSrc(getframe(song.uri))}}"></iframe>
+            <iframe width="100%"  scrolling="no" frameborder="no" ng-src="{{getframe(song.id)}}"></iframe>
         </div>
         <div class="col-lg-1">
             <div class="dropdown">
@@ -94,7 +94,7 @@
                   <b>+</b>
                 </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li ng-repeat="item in playlists">
+                <li ng-repeat="item in getPlaylists()">
                     <a ng-click="addSongToPlaylist(song, item.id)">
                         {{item.name}}
                     </a>
@@ -109,7 +109,7 @@
     </div>
     <div class="row searchPagination">
         <div class="col-lg12">
-            <uib-pagination ng-show="pageList.length != 0" ng-change="pageChange()" total-items="totalItems" ng-model="currentPage" max-size="maxSize" items-per-page="itemsPerPage" class="pagination-sm" boundary-link-numbers="true"></uib-pagination>
+            <uib-pagination ng-show="getPageList().length != 0" ng-change="pageChange()" total-items="totalItems" ng-model="currentPage" max-size="maxSize" items-per-page="itemsPerPage" class="pagination-sm" boundary-link-numbers="true"></uib-pagination>
         </div>
     </div>
 </div>

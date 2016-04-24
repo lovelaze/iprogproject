@@ -8,15 +8,8 @@
  * Controller of the iprogApp
  */
 angular.module('iprogApp')
-  .controller('HomeCtrl', function ($scope, $location, firebasefactory) {
+  .controller('HomeCtrl', function ($scope) {
 
-    $scope.testlogin = function() {
-        var authData = firebasefactory.$getAuth();
-        if (authData) {
-          return true;
-        } else {
-          return false;
-        }
-    };
+
 
   });

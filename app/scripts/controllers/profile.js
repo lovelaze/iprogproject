@@ -142,13 +142,11 @@ angular.module('iprogApp')
                   userSnap.forEach(function(finalSnap) {
                       finalSnap.forEach(function(songs) {
                           num += 1;
-                          console.log("num = ", num);
                       });
                   });
               }
             });
           });
-          console.log("final num = ", num);
           return num;
         });
     };

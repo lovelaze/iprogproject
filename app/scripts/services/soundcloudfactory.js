@@ -44,34 +44,16 @@ angular.module('iprogApp')
 
 
         search: function(params) {
-
             var deferred = $q.defer();
-
               SC.get('/tracks', {'q':params.query, 'limit':params.limit, 'genres':params.genre, 'bpm[from]':params.minBpm, 'bpm[to]':params.maxBpm, 'duration[from]':params.minPlay, 'duration[to]':params.maxPlay}).then(function(tracks) {
                   deferred.resolve( tracks);
               });
-
-
             return deferred.promise;
-        },
-
-        createSongIframe: function(url) {
-            var iframe = 'https://w.soundcloud.com/player/?visual=false&url=' + url + '&show_artwork=true&auto_play=false';
-            return iframe;
         },
 
         createSongIframeFromId: function(id){
           var iframe = 'https://w.soundcloud.com/player/?visual=false&url=https://api.soundcloud.com/tracks/' + id + '&show_artwork=true&auto_play=false';
           return $sce.trustAsResourceUrl(iframe);
-        },
-
-        testPaging: function() {
-            console.log('fisk');
-            var deferred = $q.defer();
-            SC.get('/tracks', {limit:200, linked_partitioning:1, offset:6000}).then(function(tracks)  {
-                 deferred.resolve( tracks);
-            });
-            return deferred.promise;
         }
 
 

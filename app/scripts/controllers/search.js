@@ -8,31 +8,31 @@
  * Controller of the iprogApp
  */
 angular.module('iprogApp')
-  .controller('SearchCtrl', function ($scope, soundcloudfactory, $sce, UserService) {
+  .controller('SearchCtrl', function ($scope, soundcloudfactory, $sce, UserService, firebasedataservice) {
 
       $scope.params = {'limit':200};
-
       $scope.accordionOpen = true;
 
-      $scope.downloadables = [];
-      $scope.pageList = [];
-      $scope.playlists = [];
+      $scope.getPageList = function() {
+          return UserService.pageList;
+      };
+
+      $scope.getPlaylists = function() {
+          return UserService.playlists;
+      };
+
+
+      UserService.downloadables = [];
+      UserService.pageList = [];
 
       $scope.maxSize = 100;
-      $scope.totalItems = 175;
+      $scope.totalItems = UserService.downloadables.length;
       $scope.currentPage = 1;
       $scope.itemsPerPage = 5;
       $scope.songsPerPage = 5;
 
-      $scope.searchLimit = 10;
-
-      $scope.mstep = 1;
-      $scope.sstep = 1;
 
 
-
-      var refP = new Firebase('https://dazzling-heat-875.firebaseio.com/playlists');
-      var refU = new Firebase('https://dazzling-heat-875.firebaseio.com/users');
 
       $scope.createNewPlaylist = function(){
           $scope.populatePlaylist();
@@ -40,46 +40,31 @@ angular.module('iprogApp')
 
       // run more than once
       $scope.populatePlaylist = function(){
-          var userRef = refU.child(UserService.authData.uid);
-          var plUserRef = userRef.child('playlists');
-          plUserRef.once("value", function(snapshot) {
-
-          snapshot.forEach(function(childSnapshot) {
-            var tuple = {'id':childSnapshot.key(), 'name':childSnapshot.val()};
-            $scope.playlists.push(tuple);
-          });
-        });
+          firebasedataservice.populatePlaylist();
       };
 
       $scope.populatePlaylist();
 
 
       $scope.addSongToPlaylist = function(song, playlistId) {
-          var listRef = refP.child(playlistId).child('songs');
-          listRef.child(song.id).set(song.title);
-
+          firebasedataservice.addSongToPlaylist(song.id, song.title, playlistId);
       };
-
-      $scope.trustSrc = function(src) {
-          return $sce.trustAsResourceUrl(src);
-      };
-
 
       $scope.songQuery = function() {
           //var params = {'term':$scope.searchInput,'genre':$scope.genreOption, 'minPlay':$scope.minPlayOption, 'maxPlay':$scope.maxPlayOption, 'minbpm':$scope.minBpmOption, 'maxbpm':$scope.maxBpmOption, 'limit':200};
           soundcloudfactory.search($scope.params).then(function(data) {
-              $scope.downloadables = [];
+              UserService.downloadables = [];
 
               data.forEach(function(track) {
                   if (track.downloadable) {
-                      $scope.downloadables.push(track);
+                      UserService.downloadables.push(track);
                   }
               });
 
-              $scope.totalItems = $scope.downloadables.length;
+              $scope.totalItems = UserService.downloadables.length;
 
-              if ($scope.downloadables.length === 0) {
-                  $scope.pageList = [];
+              if (UserService.downloadables.length === 0) {
+                  UserService.pageList = [];
               } else {
                   updatePage(1);
               }
@@ -88,29 +73,22 @@ angular.module('iprogApp')
           console.log($scope.params);
       };
 
-      $scope.getframe = function(url) {
-          return soundcloudfactory.createSongIframe(url);
+      $scope.getframe = function(id) {
+          return soundcloudfactory.createSongIframeFromId(id);
       };
 
       var updatePage = function(page) {
           $scope.currentPage = page;
           var begin = ($scope.currentPage - 1) * $scope.itemsPerPage;
           var end = begin + $scope.itemsPerPage;
-          if ($scope.downloadables.length - end < 0) {
-              end = $scope.downloadables.length;
+          if (UserService.downloadables.length - end < 0) {
+              end = UserService.downloadables.length;
           }
-          $scope.pageList = $scope.downloadables.slice(begin, end);
+          UserService.pageList = UserService.downloadables.slice(begin, end);
       };
 
       $scope.pageChange = function() {
           updatePage($scope.currentPage);
       };
-
-
-
-
-
-
-
 
   });
