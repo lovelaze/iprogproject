@@ -49,7 +49,7 @@ angular.module('iprogApp')
 
     var init = function() {
         $scope.getplaylistIds();
-        refusers.child(UserService.authData.uid).child('playlists').limitToLast(1).on('child_added', function(childSnapshot, prevChildKey) {
+        refusers.child(UserService.authData.uid).child('playlists').on('child_added', function(childSnapshot, prevChildKey) {
             console.log('playlist added');
             console.log(childSnapshot.val());
         });
@@ -75,6 +75,7 @@ angular.module('iprogApp')
       var userRef = refusers.child(UserService.authData.uid);
       var plUserRef = userRef.child('playlists');
       plUserRef.child(pushid).set(listname);
+      $scope.playlistIds.push({'id':pushid, 'name':listname});
 
       //$scope.getPlaylistSongs();
     };
