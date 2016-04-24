@@ -39,6 +39,8 @@ angular.module('iprogApp')
       var userRef = refusers.child(UserService.authData.uid);
       var plUserRef = userRef.child('playlists');
       plUserRef.child(pushid).set(listname);
+
+      $scope.getPlaylistSongs();
     };
 
     //get all the ids and name of the playlists of the logged in user (from firebase->users)
@@ -137,4 +139,15 @@ angular.module('iprogApp')
   		      break;
   		}
 	};
+
+  //removes playlist, from both "users" and "playlists" in firebase
+  $scope.removePlaylist = function(id){
+    //remove from firebase->users
+    refusers.child(UserService.authData.uid).child("playlists").child(id).remove();
+
+    //remove from firebase->playlists
+    ref.child(id).remove();
+
+    $scope.getPlaylistSongs();
+  };
 });
