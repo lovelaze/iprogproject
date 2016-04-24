@@ -1,3 +1,12 @@
+.green {
+  background-color: green;
+}
+
+#pic {
+    text-align: center;
+    padding-left: 200px;
+}
+
 .vertical-align {
     display: flex;
     align-items: center;
@@ -16,7 +25,7 @@
 }
 
 .jumbo {
-  background: rgba(255, 250, 250, 0.5);
+  background: rgba(255, 250, 250, 0.7);
 }
 
 .opac {
@@ -88,7 +97,7 @@
 
 body {
   padding: 0;
-  background-image: url("/images/background1.png");
+  background-image: url("/images/congruent_pentagon.png");
 }
 
 html {overflow-y: scroll;}
