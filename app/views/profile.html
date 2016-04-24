@@ -19,7 +19,22 @@
         <p1 style="float:left; font-size: 18px">Playlists: {{playlistIds.length}}</p1>
         <br><br>
         <p2 style="float:left; font-size: 18px">Total songs: {{getSongsCount()}}</p2>
-        <br>
+        <br><br>
+
+        <hr style="width: 100%; color: grey; height: 1px; background-color:grey;" />
+        <p class="col-lg-12" style="float:left;padding-left:0px;">Change your password</p>
+        <div class="col-lg-4" style="padding-left:0px;">
+            <div class="input-group input-group-sm">
+              <input ng-model="oldpass" type="password" class="form-control" placeholder="old password">
+            </div>
+        </div>
+        <div class="col-lg-7" style="padding-left:0px;">
+            <div class="input-group input-group-sm">
+              <input ng-model="newpass" type="password" class="form-control" placeholder="new password">
+              <span style="width:40%" class="input-group-addon" ng-click="changePassword">Submit</span>
+            </div>
+        </div>
+        <br><br><br>
     </div>
     <div ng-show="showPlaylists">
 
