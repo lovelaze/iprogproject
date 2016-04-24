@@ -2,14 +2,15 @@
 
     <fieldset class="form-group">
         <label for="exampleInputEmail1">Email address</label>
-        <input ng-model="email" type="email" class="form-control" placeholder="Enter email">
+        <input ng-model="email" type="text" class="form-control" placeholder="Enter email">
     </fieldset>
     <fieldset class="form-group">
         <label for="exampleInputPassword1">Password</label>
         <input ng-model="password" type="password" class="form-control" placeholder="Password">
     </fieldset>
     <div class="centerlogin">
-        <button ng-click="register()" type="submit" class="btn btn-primary">Register</button>
-        <button ng-click="login()" type="submit" class="btn btn-primary">Login</button>
+        <button ng-disabled="!password || !email" ng-click="register()" type="submit" class="btn btn-primary">Register</button>
+        <button ng-disabled="!password || !email" ng-click="login()" type="submit" class="btn btn-primary">Login</button>
+        <button ng-disabled="!email" ng-click="resetPassword(email)" type="submit" class="btn btn-primary btn-danger">Reset password</button>
     </div>
 </div>

@@ -41,6 +41,18 @@ angular.module('iprogApp')
         });
     };
 
+    $scope.resetPassword = function(text) {
+        firebaseauthfactory.$resetPassword({
+          email: text
+        }).then(function() {
+          console.log("Password reset email sent successfully!");
+          $window.alert(console.log("Password reset email sent successfully to ", text));
+        }).catch(function(error) {
+          console.error("Error: ", error);
+          $window.alert("Error: ", error);
+        });
+    };
+
 
 
   });

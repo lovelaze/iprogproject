@@ -14,6 +14,7 @@ angular.module('iprogApp')
 
     $scope.showInfo = true;
     $scope.showPlaylists = false;
+    console.log(UserService.authData);
 
     $scope.getPlaylistIds = function() {
         return UserService.playlistIds;
