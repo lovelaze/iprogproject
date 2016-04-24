@@ -34,15 +34,6 @@ angular.module('iprogApp')
                 $window.alert(me.username);
             });
         },
-        getSong: function () {
-            var track_url = 'https://soundcloud.com/hexagon/madison-mars-milky-way-radio-edit';
-            $window.SC.oEmbed(track_url, { auto_play: false }).then(function(response) {
-                console.log('Object Response', response);
-                $window.alert('SoundCloud channel: ' + response.author_name + ', ' + 'Track name: ' + response.title);
-            });
-        },
-
-
         search: function(params) {
             var deferred = $q.defer();
               SC.get('/tracks', {'q':params.query, 'limit':params.limit, 'genres':params.genre, 'bpm[from]':params.minBpm, 'bpm[to]':params.maxBpm, 'duration[from]':params.minPlay, 'duration[to]':params.maxPlay}).then(function(tracks) {
@@ -50,14 +41,10 @@ angular.module('iprogApp')
               });
             return deferred.promise;
         },
-
         createSongIframeFromId: function(id){
           var iframe = 'https://w.soundcloud.com/player/?visual=false&url=https://api.soundcloud.com/tracks/' + id + '&show_artwork=true&auto_play=false';
           return $sce.trustAsResourceUrl(iframe);
         }
-
-
-
 
     };
 });
