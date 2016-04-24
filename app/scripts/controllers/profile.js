@@ -132,22 +132,25 @@ angular.module('iprogApp')
     };
 
     $scope.getSongsCount = function() {
-      var num = 0;
-      ref.on("value", function(snapshot) {
-        snapshot.forEach(function(childSnapshot) {
-          childSnapshot.forEach(function(childChildSnapshot) {
-            childChildSnapshot.forEach(function() {
-              // console.log("SONGSNAPSHOT VALUE: ", songSnapshot.val());
-              num += 1;
+        var num = 0;
+        ref.once("value", function(snapshot) {
+          snapshot.forEach(function(childSnapshot) {
+            childSnapshot.forEach(function(childChildSnapshot) {
+              if (childChildSnapshot.val() == UserService.authData.password.email) {
+                  //console.log(childChildSnapshot.val());
+                  var userSnap = childSnapshot;
+                  userSnap.forEach(function(finalSnap) {
+                      finalSnap.forEach(function(songs) {
+                          num += 1;
+                          console.log("num = ", num);
+                      });
+                  });
+              }
             });
           });
+          console.log("final num = ", num);
+          return num;
         });
-      });
-      if (num > 0) {
-        return num;
-      } else {
-        return NaN;
-      }
     };
 
     //setting scope bool variables that decides if divs are showing or not, depending on which "header" you click
