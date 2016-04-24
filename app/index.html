@@ -26,16 +26,18 @@
     <div ng-controller="HeaderCtrl" class="header">
       <div class="navbar navbar-default" role="navigation">
         <div class="container">
-          <div class="navbar-header">
+          <div class="navbar-header navbar-left">
             <p class="navbar-brand">SoundCloud Downloader</p>
           </div>
 
           <div  class="collapse navbar-collapse" id="js-navbar-collapse">
 
-            <ul id="navi" class="nav navbar-nav">
+            <ul id="navi" class="nav navbar-nav navbar-center">
               <li class=""><a href="#/">Home</a></li>
               <li ng-show="IsLoggedIn()" ng-cloak><a ng-href="#/search">Search</a></li>
               <li ng-show="IsLoggedIn()" ng-cloak><a ng-href="#/profile">Profile</a></li>
+            </ul>
+            <ul id="navi" class="nav navbar-nav navbar-right">
               <li ng-show="IsLoggedIn()" ng-cloak><a ng-href=""><b>{{getAuthData().password.email}}</b></a></li>
               <button ng-show="!IsLoggedIn()" ng-cloak ng-click="loginreg()" type="submit" style="margin-bottom: 0px" class="btn btn-default test">Login/Register</button>
               <button ng-show="IsLoggedIn()" ng-cloak ng-click="logout()" type="submit" style="margin-bottom: 0px" class="btn btn-danger test">Logout</button>
