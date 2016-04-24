@@ -12,9 +12,14 @@ angular.module('iprogApp')
 
      this.loggedIn = false;
      this.authData = undefined;
+
      this.playlists = [];
      this.downloadables = [];
      this.pageList = [];
+
+     this.playlistIds = [];
+     this.allPlaylists = [];
+     this.currentSongsList = [];
 
     // AngularJS will instantiate a singleton by calling "new" on this function
 

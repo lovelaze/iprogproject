@@ -10,30 +10,25 @@
  * Controller of the iprogApp
  */
 angular.module('iprogApp')
-  .controller('ProfileCtrl', function ($scope, UserService, soundcloudfactory, $q) {
+  .controller('ProfileCtrl', function ($scope, UserService, soundcloudfactory, $q, firebasedataservice) {
 
-    var ref = new Firebase('https://dazzling-heat-875.firebaseio.com/playlists');
-    var refusers = new Firebase('https://dazzling-heat-875.firebaseio.com/users');
+    $scope.getPlaylistIds = function() {
+        return UserService.playlistIds;
+    };
 
-    $scope.playlistIds = [];
-    $scope.allPlaylists = [];
+    $scope.getAllPlaylists = function() {
+        return UserService.allPlaylists;
+    };
 
-    $scope.currentSongsList = [];
+    $scope.getCurrentSongsList = function() {
+        return UserService.currentSongsList;
+    };
 
-    $scope.showValueOne = true;
-    $scope.showValueTwo = false;
-    $scope.showValueThree = false;
+    $scope.showInfo = true;
+    $scope.showPlaylists = false;
 
     var getSongs = function(id) {
-        $scope.currentSongsList = [];
-
-        ref.child(id).child('songs').once('value', function(snapshot) {
-            snapshot.forEach(function(songSnapshot) {
-                var song = {'id':songSnapshot.key(), name:songSnapshot.val()};
-                $scope.currentSongsList.push(song);
-            });
-        });
-
+        firebasedataservice.getSongs(id);
     };
 
     $scope.accordionOnClick = function(id, open) {
@@ -47,9 +42,10 @@ angular.module('iprogApp')
     };
 
     var init = function() {
-        $scope.getplaylistIds().then(function(data) {
-            $scope.playlistIds = data;
+        firebasedataservice.getPlaylistIds().then(function(data) {
+            UserService.playlistIds = data;
         });
+        /*
         refusers.child(UserService.authData.uid).child('playlists').on('child_added', function(childSnapshot, prevChildKey) {
             console.log('playlist added');
             console.log(childSnapshot.val());
@@ -58,6 +54,7 @@ angular.module('iprogApp')
         refusers.child(UserService.authData.uid).child('playlists').on('child_removed', function(childSnapshot) {
             console.log('playlist removed');
         });
+        */
     };
 
     //called when addplaylist button is pressed
@@ -65,56 +62,18 @@ angular.module('iprogApp')
       //maybe use firebase array for this shit
       var listname = $scope.newPlaylist;
       var username = UserService.authData.password.email;
-      //pushing to add specific if to each playlist
-      var id = ref.push({
-        name: listname,
-        user: username
-      });
-      var pushid = id.key();
-
-      //add to firebase->users
-      var userRef = refusers.child(UserService.authData.uid);
-      var plUserRef = userRef.child('playlists');
-      plUserRef.child(pushid).set(listname);
-      $scope.playlistIds.push({'id':pushid, 'name':listname});
+      firebasedataservice.addPlaylist(listname, username);
 
     };
 
     $scope.removeSong = function(listId, songId, songIndex) {
-
-        ref.child(listId).child('songs').child(songId).remove();
-        if (songIndex > -1) {
-            $scope.currentSongsList.splice(songIndex, 1);
-        }
-
-
+        firebasedataservice.removeSong(listId, songId, songIndex);
     };
-
-    //get all the ids and name of the playlists of the logged in user (from firebase->users)
-    $scope.getplaylistIds = function(){
-
-        var tmplist = [];
-        var deferred = $q.defer();
-
-        var userRef = refusers.child(UserService.authData.uid);
-        var plUserRef = userRef.child('playlists');
-        plUserRef.once("value", function(snapshot) {
-            snapshot.forEach(function(childSnapshot) {
-                var list_id = {'id':childSnapshot.key(), 'name':childSnapshot.val()};
-                tmplist.push(list_id);
-            });
-            deferred.resolve(tmplist);
-        });
-
-        return deferred.promise;
-
-    };
-
 
     $scope.getUsername = function() {
         return UserService.authData;
     };
-
+    /*
     $scope.getPlaylistCount = function() {
         var num = 0;
         ref.on("value", function(snapshot) {
@@ -126,11 +85,13 @@ angular.module('iprogApp')
             return NaN;
         }
     };
+    */
 
     $scope.getframe = function(id) {
         return soundcloudfactory.createSongIframeFromId(id);
     };
 
+    /*
     $scope.getSongsCount = function() {
         var num = 0;
         ref.once("value", function(snapshot) {
@@ -150,35 +111,25 @@ angular.module('iprogApp')
           return num;
         });
     };
+    */
 
     //setting scope bool variables that decides if divs are showing or not, depending on which "header" you click
     $scope.showContent = function(function_nr) {
-      $scope.showValueOne = false;
-      $scope.showValueTwo = false;
-      $scope.showValueThree = false;
+      $scope.showInfo = false;
+      $scope.showPlaylists = false;
   		switch (function_nr) {
   		    case 0:
-  		      $scope.showValueOne = true;
+  		      $scope.showInfo = true;
   		      break;
   		    case 1:
-  		      $scope.showValueTwo = true;
-  		      break;
-  		    case 2:
-  		      $scope.showValueThree = true;
+  		      $scope.showPlaylists = true;
   		      break;
   		}
 	};
 
   //removes playlist, from both "users" and "playlists" in firebase
   $scope.removePlaylist = function(id, index){
-    //remove from firebase->users
-    refusers.child(UserService.authData.uid).child("playlists").child(id).remove();
-    //remove from firebase->playlists
-    ref.child(id).remove();
-
-    if (index > -1) {
-        $scope.playlistIds.splice(index, 1);
-    }
+      firebasedataservice.removePlaylist(id, index);
   };
 
   init();
