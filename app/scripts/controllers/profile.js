@@ -12,6 +12,10 @@
 angular.module('iprogApp')
   .controller('ProfileCtrl', function ($scope, UserService, soundcloudfactory, $q, firebasedataservice) {
 
+    $scope.showInfo = true;
+    $scope.showPlaylists = false;
+
+
     $scope.getPlaylistIds = function() {
         return UserService.playlistIds;
     };
@@ -23,9 +27,6 @@ angular.module('iprogApp')
     $scope.getCurrentSongsList = function() {
         return UserService.currentSongsList;
     };
-
-    $scope.showInfo = true;
-    $scope.showPlaylists = false;
 
     var getSongs = function(id) {
         firebasedataservice.getSongs(id);
@@ -45,16 +46,6 @@ angular.module('iprogApp')
         firebasedataservice.getPlaylistIds().then(function(data) {
             UserService.playlistIds = data;
         });
-        /*
-        refusers.child(UserService.authData.uid).child('playlists').on('child_added', function(childSnapshot, prevChildKey) {
-            console.log('playlist added');
-            console.log(childSnapshot.val());
-        });
-
-        refusers.child(UserService.authData.uid).child('playlists').on('child_removed', function(childSnapshot) {
-            console.log('playlist removed');
-        });
-        */
     };
 
     //called when addplaylist button is pressed

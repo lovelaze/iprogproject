@@ -22,8 +22,6 @@ angular.module('iprogApp')
       };
 
 
-      UserService.downloadables = [];
-      UserService.pageList = [];
 
       $scope.maxSize = 100;
       $scope.totalItems = UserService.downloadables.length;
@@ -31,20 +29,17 @@ angular.module('iprogApp')
       $scope.itemsPerPage = 5;
       $scope.songsPerPage = 5;
 
+      var init = function() {
+          UserService.playlists = [];
+          UserService.downloadables = [];
+          UserService.pageList = [];
+          populatePlaylist();
 
-
-
-      $scope.createNewPlaylist = function(){
-          $scope.populatePlaylist();
       };
-
       // run more than once
-      $scope.populatePlaylist = function(){
+      var populatePlaylist = function(){
           firebasedataservice.populatePlaylist();
       };
-
-      $scope.populatePlaylist();
-
 
       $scope.addSongToPlaylist = function(song, playlistId) {
           firebasedataservice.addSongToPlaylist(song.id, song.title, playlistId);
@@ -91,4 +86,6 @@ angular.module('iprogApp')
           updatePage($scope.currentPage);
       };
 
+
+      init();
   });
