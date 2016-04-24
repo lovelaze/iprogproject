@@ -79,45 +79,11 @@ angular.module('iprogApp')
     $scope.getUsername = function() {
         return UserService.authData;
     };
-    /*
-    $scope.getPlaylistCount = function() {
-        var num = 0;
-        ref.on("value", function(snapshot) {
-            num = snapshot.numChildren();
-        });
-        if (num > 0) {
-            return num;
-        } else {
-            return NaN;
-        }
-    };
-    */
 
     $scope.getframe = function(id) {
         return soundcloudfactory.createSongIframeFromId(id);
     };
 
-    /*
-    $scope.getSongsCount = function() {
-        var num = 0;
-        ref.once("value", function(snapshot) {
-          snapshot.forEach(function(childSnapshot) {
-            childSnapshot.forEach(function(childChildSnapshot) {
-              if (childChildSnapshot.val() == UserService.authData.password.email) {
-                  //console.log(childChildSnapshot.val());
-                  var userSnap = childSnapshot;
-                  userSnap.forEach(function(finalSnap) {
-                      finalSnap.forEach(function(songs) {
-                          num += 1;
-                      });
-                  });
-              }
-            });
-          });
-          return num;
-        });
-    };
-    */
 
     //setting scope bool variables that decides if divs are showing or not, depending on which "header" you click
     $scope.showContent = function(function_nr) {
@@ -138,17 +104,6 @@ angular.module('iprogApp')
       firebasedataservice.removePlaylist(id, index);
   };
 
-  /*
-
-  $scope.changePassword = function() {
-    if($scope.oldpass == NULL || $scope.newpass == NULL || $scope.newpass == ""){
-      return;
-    } else {
-
-    }
-  };
-
-  */
 
   init();
 });
