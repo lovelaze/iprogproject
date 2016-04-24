@@ -65,7 +65,7 @@ angular.module('iprogApp')
               }
 
           });
-          console.log($scope.params);
+          
       };
 
       $scope.getframe = function(id) {

@@ -35,8 +35,17 @@ angular.module('iprogApp')
             });
         },
         search: function(params) {
+            console.log(params);
             var deferred = $q.defer();
-              SC.get('/tracks', {'q':params.query, 'limit':params.limit, 'genres':params.genre, 'bpm[from]':params.minBpm, 'bpm[to]':params.maxBpm, 'duration[from]':params.minPlay, 'duration[to]':params.maxPlay}).then(function(tracks) {
+            Object.keys(params).forEach(function(key) {
+                if (!params[key]) {
+                    delete params[key];
+                }
+            });
+            console.log(params);
+
+
+              SC.get('/tracks', {'q':params.query, 'limit':params.limit, 'genres':params.genre, 'bpm[from]':params.minBpm, 'bpm[to]':params.maxBpm, 'duration[from]':(params.minPlay), 'duration[to]':(params.maxPlay)}).then(function(tracks) {
                   deferred.resolve( tracks);
               });
             return deferred.promise;
