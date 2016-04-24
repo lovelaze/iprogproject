@@ -1,3 +1,28 @@
+.centertext {
+  font-weight: bold;
+  text-align: center;
+}
+
+#tabben {
+  font-weight: bold;
+  color: black;
+  font-size: 15px;
+
+}
+/* not working well, but can be fixed */
+#tabben > li:not(:last-child) {
+  border-right:solid 1px #000;/* This will not give border to last li element */
+}
+
+
+.navbar2 .navbar2-nav {
+    display: inline-block;
+    float: none;
+}
+.navbar2 .navbar2-collapse {
+    text-align: center;
+}
+
 .centerlogin {
   text-align: center;
 }
