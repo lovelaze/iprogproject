@@ -64,9 +64,6 @@
           </uib-accordion-group>
       </uib-accordion>
   </div>
-
-
-
     </div>
 </div>
 
@@ -78,7 +75,7 @@
     </div>
 </div>
 
-<div class="jumbotron" ng-show="getPageList().length != 0">
+<div class="jumbotron jumbo" ng-show="getPageList().length != 0">
     <div class="row searchPagination">
         <div class="col-lg12">
             <uib-pagination ng-show="getPageList().length != 0" ng-change="pageChange()" total-items="totalItems" ng-model="currentPage" max-size="maxSize" items-per-page="itemsPerPage" class="pagination-sm" boundary-link-numbers="true"></uib-pagination>
@@ -103,9 +100,7 @@
                 <li><a>New Playlist</a></li>
               </ul>
           </div>
-            <!--<button ng-click="addSongToPlaylist(song.uri)" type="submit" class="btn-sm btn-success"><b>+</b></button>-->
         </div>
-
     </div>
     <div class="row searchPagination">
         <div class="col-lg12">
