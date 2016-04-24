@@ -10,12 +10,10 @@
  * Controller of the iprogApp
  */
 angular.module('iprogApp')
-  .controller('ProfileCtrl', function ($scope, UserService, soundcloudfactory, $q, firebasedataservice) {
+  .controller('ProfileCtrl', function ($scope, $window, $location, $q, UserService, soundcloudfactory, firebasedataservice, firebaseauthfactory) {
 
     $scope.showInfo = true;
     $scope.showPlaylists = false;
-    $scope.oldpass;
-    $scope.newpass;
 
     $scope.getPlaylistIds = function() {
         return UserService.playlistIds;
@@ -31,6 +29,21 @@ angular.module('iprogApp')
 
     var getSongs = function(id) {
         firebasedataservice.getSongs(id);
+    };
+
+    $scope.changePassword = function(oldpass, newpass) {
+        firebaseauthfactory.$changePassword({
+          email: UserService.authData.password.email,
+          oldPassword: oldpass,
+          newPassword: newpass
+        }).then(function() {
+          $window.alert("Password changed successfully!");
+          firebaseauthfactory.$unauth();
+          UserService.loggedIn = false;
+          $location.path("/home");
+        }).catch(function(error) {
+          $window.alert("Invalid passwords!");
+        });
     };
 
     $scope.accordionOnClick = function(id, open) {
@@ -124,6 +137,8 @@ angular.module('iprogApp')
       firebasedataservice.removePlaylist(id, index);
   };
 
+  /*
+
   $scope.changePassword = function() {
     if($scope.oldpass == NULL || $scope.newpass == NULL || $scope.newpass == ""){
       return;
@@ -131,6 +146,8 @@ angular.module('iprogApp')
 
     }
   };
+
+  */
 
   init();
 });

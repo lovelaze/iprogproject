@@ -31,7 +31,7 @@
         <div class="col-lg-7" style="padding-left:0px;">
             <div class="input-group input-group-sm">
               <input ng-model="newpass" type="password" class="form-control" placeholder="new password">
-              <span style="width:40%" class="input-group-addon" ng-click="changePassword">Submit</span>
+              <span class="input-group-btn"><button class="btn btn-default" ng-click="changePassword(oldpass, newpass)">Submit</button></span>
             </div>
         </div>
         <br><br><br>
