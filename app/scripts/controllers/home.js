@@ -8,7 +8,7 @@
  * Controller of the iprogApp
  */
 angular.module('iprogApp')
-  .controller('HomeCtrl', function ($scope) {
+  .controller('HomeCtrl', function () {
 
 
 
