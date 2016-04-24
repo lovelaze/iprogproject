@@ -6,7 +6,6 @@
             <div class="collapse navbar-collapse" id="js-navbar-collapse">
                 <ul id="navi" class="nav navbar-nav">
                     <li id="profile_tab1"><a ng-click="showContent(0)" ng-href="#/profile">My Info</a></li>
-                    <li id="profile_tab2"><a ng-click="showContent(1)" ng-href="#/profile">Friends</a></li>
                     <li id="profile_tab3"><a ng-click="showContent(2)" ng-href="#/profile">Playlists</a></li>
                 </ul>
             </div>
@@ -22,43 +21,37 @@
         <p2 style="float:left; font-size: 18px">Total songs: {{getSongsCount()}}</p2>
         <br>
     </div>
-    <div ng-show="showValueTwo">
-        <h3 align="left">DJ Khalid</h3></a>
-        <p1 style="float:left">Playlists</p1>
-        <br>
-        <hr style="width: 100%; color: grey; height: 1px; background-color:grey;" />
-        <h3 align="left">Alan</h3>
-        <p1 style="float:left">Playlists</p1>
-        <br>
-        <hr style="width: 100%; color: grey; height: 1px; background-color:grey;" />
-        <h3 align="left">FreddyB Jr</h3>
-        <p1 style="float:left">Playlists</p1>
-        <br>
-    </div>
     <div ng-show="showValueThree">
-        <div class="input-group">
-            <input ng-model="newPlaylist" type="text" class="form-control" placeholder="Playlist name">
+
+        <div class="input-group input-group-lg">
+            <input ng-model="newPlaylist" type="text" class="form-control" placeholder="Enter new playlist name" autofocus>
             <span class="input-group-btn">
-                <button ng-click="addPlaylistToFirebase()" type="submit" class="btn-sm btn-default">Add playlist</button>
+                <button ng-click="addPlaylistToFirebase()" type="submit" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>
             </span>
         </div>
+
         <div class="col-lg-12">
-            <h2 align="left" style="font-weight: bold;">Your playlists:</h2>
+            <h2 align="left" style="font-weight: bold;">Number of playlists: {{playlistIds.length}}</h2>
         </div>
         <hr style="width: 100%; color: black; height: 1px; background-color:black;" />
         <!--SHARE BUTTOM OM MAN VILL HA DET<button type="submit" class="btn-sm btn-default" style="float:right">Share</button>-->
         <uib-accordion >
-            <div class="row vertical-align" ng-repeat="list in playlistIds">
+            <div class="row vertical-align" style="padding-top:10px" ng-repeat="list in playlistIds">
                 <div class="col-lg-11">
                   <uib-accordion-group  is-open="accordionOpen" ng-click="accordionOnClick(list.id, accordionOpen)">
                       <uib-accordion-heading >
-                        <!--<h2 align="left" style="font-weight: bold;">{{list.name}}</h2>-->
-                        <!--<div class="glyphicon glyphicon-remove"  align="right"></div>-->
-                        <center>{{list.name}}<i class="glyphicon" ng-class="{'glyphicon-chevron-down': accordionOpen, 'glyphicon-chevron-right': !accordionOpen}"></i></center>
+                        <center>{{list.name}} <span ng-if="accordionOpen">- {{currentSongsList.length}} songs</span> <i class="glyphicon" ng-class="{'glyphicon-chevron-down': accordionOpen, 'glyphicon-chevron-right': !accordionOpen}"></i></center>
                       </uib-accordion-heading>
-                      <div ng-repeat="song in currentSongsList" ng-if="currentPlaylist === list.id">
-                        <p align="left">{{song.name}}</p>
-                        <iframe width="100%"  scrolling="no" frameborder="no" ng-src="{{getframe(song.id)}}"></iframe>
+                      <div class="row vertical-align" ng-repeat="song in currentSongsList" ng-if="currentPlaylist === list.id">
+                          <div class="col-lg-11">
+                            <p align="left">{{song.name}}</p>
+                            <iframe width="100%"  scrolling="no" frameborder="no" ng-src="{{getframe(song.id)}}"></iframe>
+                        </div>
+                        <div class="col-lg-1">
+                            <button ng-click="removeSong(list.id, song.id, $index)" type="button" class="btn btn-xs btn-danger">
+                                <span class="glyphicon glyphicon-remove"></span>&nbsp;
+                            </button>
+                        </div>
                       </div>
                   </uib-accordion-group>
               </div>

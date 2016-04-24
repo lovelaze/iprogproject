@@ -10,7 +10,7 @@
  * Controller of the iprogApp
  */
 angular.module('iprogApp')
-  .controller('ProfileCtrl', function ($scope, UserService, soundcloudfactory) {
+  .controller('ProfileCtrl', function ($scope, UserService, soundcloudfactory, $q) {
 
     var ref = new Firebase('https://dazzling-heat-875.firebaseio.com/playlists');
     var refusers = new Firebase('https://dazzling-heat-875.firebaseio.com/users');
@@ -32,14 +32,13 @@ angular.module('iprogApp')
                 var song = {'id':songSnapshot.key(), name:songSnapshot.val()};
                 $scope.currentSongsList.push(song);
             });
-            console.log($scope.currentSongsList);
         });
 
-    }
+    };
 
     $scope.accordionOnClick = function(id, open) {
         if (open) { //opening
-            if ($scope.currentPlaylist != id) {
+            if ($scope.currentPlaylist !== id) {
                 $scope.currentPlaylist = id;
                 getSongs(id);
             }
@@ -48,7 +47,9 @@ angular.module('iprogApp')
     };
 
     var init = function() {
-        $scope.getplaylistIds();
+        $scope.getplaylistIds().then(function(data) {
+            $scope.playlistIds = data;
+        });
         refusers.child(UserService.authData.uid).child('playlists').on('child_added', function(childSnapshot, prevChildKey) {
             console.log('playlist added');
             console.log(childSnapshot.val());
@@ -77,49 +78,38 @@ angular.module('iprogApp')
       plUserRef.child(pushid).set(listname);
       $scope.playlistIds.push({'id':pushid, 'name':listname});
 
-      //$scope.getPlaylistSongs();
+    };
+
+    $scope.removeSong = function(listId, songId, songIndex) {
+
+        ref.child(listId).child('songs').child(songId).remove();
+        if (songIndex > -1) {
+            $scope.currentSongsList.splice(songIndex, 1);
+        }
+
+
     };
 
     //get all the ids and name of the playlists of the logged in user (from firebase->users)
     $scope.getplaylistIds = function(){
-      $scope.playlistIds = [];
-      var userRef = refusers.child(UserService.authData.uid);
-      var plUserRef = userRef.child('playlists');
-      plUserRef.once("value", function(snapshot) {
-        snapshot.forEach(function(childSnapshot) {
-          var list_id = {'id':childSnapshot.key(), 'name':childSnapshot.val()};
-          $scope.playlistIds.push(list_id);
-        });
-      });
-    };
 
-    //stores every song into allPlaylists together with the id of its list
-    $scope.getPlaylistSongs = function () {
-      $scope.allPlaylists = [];
-      $scope.getplaylistIds();
-      var listid;
-      ref.once("value", function(snapshot) {
-        snapshot.forEach(function(childSnapshot){
-          // childSnapshot -> playlist id level (e.g. -KG2rIEG0tNmnlL_An5z)
-          listid = childSnapshot.key();
-          childSnapshot.forEach(function(child2Snapshot){
-            // child2Snapshot -> playlist field level (name, songs, user)
-            if(child2Snapshot.key() == "songs"){
-              child2Snapshot.forEach(function(child3Snapshot){
-                // child3Snapshot -> song level (e.g. key=260510896: val=Land Of Thieves Demo)
-                var song = {'id':child3Snapshot.key(), 'name':child3Snapshot.val(), 'listid': listid};
-                $scope.allPlaylists.push(song);
-              });
-            }
-          });
+        var tmplist = [];
+        var deferred = $q.defer();
+
+        var userRef = refusers.child(UserService.authData.uid);
+        var plUserRef = userRef.child('playlists');
+        plUserRef.once("value", function(snapshot) {
+            snapshot.forEach(function(childSnapshot) {
+                var list_id = {'id':childSnapshot.key(), 'name':childSnapshot.val()};
+                tmplist.push(list_id);
+            });
+            deferred.resolve(tmplist);
         });
-      });
+
+        return deferred.promise;
 
     };
-    //------------------------ CALL THIS METHOD BELOW SOMEWHERE SO THAT IS HAPPEN MORE THAN ONCE ---------------------
-    // ALSO PLAYLISTS AND MYINFO information DOES NOT SHOW UP UNTIL YOU PRESS A HEADER AT LEAST ONE TIME, NEEDS FIXING
-    //----------------------------------------------------------------------------------------------------------------
-    //$scope.getPlaylistSongs();
+
 
     $scope.getUsername = function() {
         return UserService.authData;
@@ -185,11 +175,9 @@ angular.module('iprogApp')
     //remove from firebase->playlists
     ref.child(id).remove();
 
-
     if (index > -1) {
         $scope.playlistIds.splice(index, 1);
     }
-
   };
 
   init();
