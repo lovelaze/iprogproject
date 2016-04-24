@@ -10,13 +10,6 @@
 */
 angular.module('iprogApp')
 .factory('soundcloudfactory', function ($window, $q, $sce) {
-
-    //var imageurl = "www.image.com";
-    //var cl_id = '927cd813d10aaf8f2040cd5ab3984734';
-    //var redirect_uri = 'http://localhost:9000/sccallback.html';
-
-
-
     // Public API here
     return {
         ScTest: function () {
