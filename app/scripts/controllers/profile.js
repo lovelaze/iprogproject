@@ -14,7 +14,8 @@ angular.module('iprogApp')
 
     $scope.showInfo = true;
     $scope.showPlaylists = false;
-
+    $scope.oldpass;
+    $scope.newpass;
 
     $scope.getPlaylistIds = function() {
         return UserService.playlistIds;
@@ -121,6 +122,14 @@ angular.module('iprogApp')
   //removes playlist, from both "users" and "playlists" in firebase
   $scope.removePlaylist = function(id, index){
       firebasedataservice.removePlaylist(id, index);
+  };
+
+  $scope.changePassword = function() {
+    if($scope.oldpass == NULL || $scope.newpass == NULL || $scope.newpass == ""){
+      return;
+    } else {
+
+    }
   };
 
   init();
