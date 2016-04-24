@@ -10,18 +10,54 @@
  * Controller of the iprogApp
  */
 angular.module('iprogApp')
-  .controller('ProfileCtrl', function ($scope, UserService, soundcloudfactory, firebasefactory) {
+  .controller('ProfileCtrl', function ($scope, UserService, soundcloudfactory) {
 
     var ref = new Firebase('https://dazzling-heat-875.firebaseio.com/playlists');
     var refusers = new Firebase('https://dazzling-heat-875.firebaseio.com/users');
 
     $scope.playlistIds = [];
     $scope.allPlaylists = [];
-    $scope.allPlaylists2 = [];
+
+    $scope.currentSongsList = [];
 
     $scope.showValueOne = true;
     $scope.showValueTwo = false;
     $scope.showValueThree = false;
+
+    var getSongs = function(id) {
+        $scope.currentSongsList = [];
+
+        ref.child(id).child('songs').once('value', function(snapshot) {
+            snapshot.forEach(function(songSnapshot) {
+                var song = {'id':songSnapshot.key(), name:songSnapshot.val()};
+                $scope.currentSongsList.push(song);
+            });
+            console.log($scope.currentSongsList);
+        });
+
+    }
+
+    $scope.accordionOnClick = function(id, open) {
+        if (open) { //opening
+            if ($scope.currentPlaylist != id) {
+                $scope.currentPlaylist = id;
+                getSongs(id);
+            }
+        } else { // closing
+        }
+    };
+
+    var init = function() {
+        $scope.getplaylistIds();
+        refusers.child(UserService.authData.uid).child('playlists').limitToLast(1).on('child_added', function(childSnapshot, prevChildKey) {
+            console.log('playlist added');
+            console.log(childSnapshot.val());
+        });
+
+        refusers.child(UserService.authData.uid).child('playlists').on('child_removed', function(childSnapshot) {
+            console.log('playlist removed');
+        });
+    };
 
     //called when addplaylist button is pressed
     $scope.addPlaylistToFirebase = function() {
@@ -40,7 +76,7 @@ angular.module('iprogApp')
       var plUserRef = userRef.child('playlists');
       plUserRef.child(pushid).set(listname);
 
-      $scope.getPlaylistSongs();
+      //$scope.getPlaylistSongs();
     };
 
     //get all the ids and name of the playlists of the logged in user (from firebase->users)
@@ -77,11 +113,12 @@ angular.module('iprogApp')
           });
         });
       });
+
     };
     //------------------------ CALL THIS METHOD BELOW SOMEWHERE SO THAT IS HAPPEN MORE THAN ONCE ---------------------
     // ALSO PLAYLISTS AND MYINFO information DOES NOT SHOW UP UNTIL YOU PRESS A HEADER AT LEAST ONE TIME, NEEDS FIXING
     //----------------------------------------------------------------------------------------------------------------
-    $scope.getPlaylistSongs();
+    //$scope.getPlaylistSongs();
 
     $scope.getUsername = function() {
         return UserService.authData;
@@ -148,6 +185,8 @@ angular.module('iprogApp')
     //remove from firebase->playlists
     ref.child(id).remove();
 
-    $scope.getPlaylistSongs();
+    //$scope.getPlaylistSongs();
   };
+
+  init();
 });

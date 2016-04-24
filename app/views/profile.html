@@ -14,15 +14,15 @@
     </div>
 
     <!-- the main content -->
-    <div ng-show="showValueOne" class="ng-hide">
+    <div ng-show="showValueOne">
         <h2 align="left" style="font-weight: bold;">{{getUsername().password.email}}</h2>
         <hr style="width: 100%; color: black; height: 1px; background-color:black;" />
-        <p1 style="float:left; font-size: 18px">Playlists: {{getPlaylistCount()}}</p1>
+        <p1 style="float:left; font-size: 18px">Playlists: {{playlistIds.length}}</p1>
         <br><br>
         <p2 style="float:left; font-size: 18px">Total songs: {{getSongsCount()}}</p2>
         <br>
     </div>
-    <div ng-show="showValueTwo" class="ng-hide">
+    <div ng-show="showValueTwo">
         <h3 align="left">DJ Khalid</h3></a>
         <p1 style="float:left">Playlists</p1>
         <br>
@@ -35,7 +35,7 @@
         <p1 style="float:left">Playlists</p1>
         <br>
     </div>
-    <div ng-show="showValueThree" class="ng-hide">
+    <div ng-show="showValueThree">
         <div class="input-group">
             <input ng-model="newPlaylist" type="text" class="form-control" placeholder="Playlist name">
             <span class="input-group-btn">
@@ -48,21 +48,19 @@
         <hr style="width: 100%; color: black; height: 1px; background-color:black;" />
         <!--SHARE BUTTOM OM MAN VILL HA DET<button type="submit" class="btn-sm btn-default" style="float:right">Share</button>-->
         <uib-accordion >
-            <div class="row" ng-repeat="list in playlistIds">
-              <uib-accordion-group is-open="accordionOpen">
-                <div class="col-lg-12">
+
+              <uib-accordion-group ng-repeat="list in playlistIds" is-open="accordionOpen" ng-click="accordionOnClick(list.id, accordionOpen)">
                   <uib-accordion-heading >
                     <!--<h2 align="left" style="font-weight: bold;">{{list.name}}</h2>-->
                     <div class="glyphicon glyphicon-remove" ng-click="removePlaylist(list.id)" align="right"></div>
                     <center>{{list.name}}<i class="glyphicon" ng-class="{'glyphicon-chevron-down': accordionOpen, 'glyphicon-chevron-right': !accordionOpen}"></i></center>
                   </uib-accordion-heading>
-                  <div ng-repeat="song in allPlaylists" ng-if="list.id == song.listid">
+                  <div ng-repeat="song in currentSongsList">
                     <p align="left">{{song.name}}</p>
                     <iframe width="100%"  scrolling="no" frameborder="no" ng-src="{{getframe(song.id)}}"></iframe>
                   </div>
-                </div>
               </uib-accordion-group>
-            </div>
+
         </uib-accordion>
     </div>
 

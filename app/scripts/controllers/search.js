@@ -10,7 +10,7 @@
 angular.module('iprogApp')
   .controller('SearchCtrl', function ($scope, soundcloudfactory, $sce, UserService) {
 
-      $scope.params = {'limit':200}
+      $scope.params = {'limit':200};
 
       $scope.accordionOpen = true;
 
@@ -34,7 +34,7 @@ angular.module('iprogApp')
       var refP = new Firebase('https://dazzling-heat-875.firebaseio.com/playlists');
       var refU = new Firebase('https://dazzling-heat-875.firebaseio.com/users');
 
-      $scope.createNewPlaylist = function(name){
+      $scope.createNewPlaylist = function(){
           $scope.populatePlaylist();
       };
 

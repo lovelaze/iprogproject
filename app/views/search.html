@@ -70,7 +70,15 @@
     </div>
 </div>
 
-<div class="jumbotron">
+<div class="jumbotron" ng-show="!pageList.length > 0">
+    <div class="row">
+        <div class="col-lg12" style="text-align:center">
+            <p> No search results!</p>
+        </div>
+    </div>
+</div>
+
+<div class="jumbotron" ng-show="pageList.length != 0">
     <div class="row searchPagination">
         <div class="col-lg12">
             <uib-pagination ng-show="pageList.length != 0" ng-change="pageChange()" total-items="totalItems" ng-model="currentPage" max-size="maxSize" items-per-page="itemsPerPage" class="pagination-sm" boundary-link-numbers="true"></uib-pagination>
