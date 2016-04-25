@@ -7,6 +7,7 @@
 then
 
 `npm install`
+`bower install`
 
 ## Build & development
 
